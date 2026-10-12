@@ -1,0 +1,31 @@
+{
+  "name": "adoyo-j-company-advocates",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "lenis": "^1.3.26",
+    "lucide-react": "^0.468.0",
+    "motion": "^13.4.6",
+    "next": "^16.4.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.186.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.4.0",
+    "typescript": "^5.7.2"
+  }
+}
