@@ -192,7 +192,7 @@ export default function Home() {
             </p>
             <p>
               We take time to understand the circumstances, explain available
-              options in plain language and prepare carefully for the work
+              options and prepare carefully for the work
               ahead. Our aim is to make the legal process feel more navigable,
               with direct communication and respect for each client's situation.
             </p>
@@ -260,10 +260,10 @@ export default function Home() {
             );
           })}
         </div>
-        <p className="legal-note">
+        {/* <p className="legal-note">
           The practice areas above are a general overview, not legal advice. The
           appropriate approach depends on the specific facts of each matter.
-        </p>
+        </p> */}
       </section>
 
       <section className="journey-section section-pad" id="how-we-work">
@@ -326,10 +326,10 @@ export default function Home() {
             </p>
           </Reveal>
         </div>
-        <p className="journey-note">
+        {/* <p className="journey-note">
           This is a general description of an initial enquiry, not a promise of
           representation or a legal assessment.
-        </p>
+        </p> */}
       </section>
 
       <section className="manifesto">
@@ -410,9 +410,9 @@ export default function Home() {
                 <small>LEGAL COUNSEL · ADVOCACY · REPRESENTATION</small>
               </div>
             </div>
-            <div className="profile-pending">
+            {/* <div className="profile-pending">
               ADVOCATE BIOGRAPHY & PROFESSIONAL DETAILS TO BE CONFIRMED
-            </div>
+            </div> */}
           </Reveal>
         </div>
       </section>
@@ -545,7 +545,10 @@ export default function Home() {
               WhatsApp <ArrowUpRight size={13} />
             </a>
           </div>
-          <a className="footer-cta" href="#contact">
+          <a
+            className="footer-cta"
+            href="mailto:adoyoadvocate@gmail.com?subject=Legal%20enquiry&body=Hello%2C%0A%0AI%20would%20like%20to%20discuss%20a%20legal%20matter.%0A%0AMy%20name%3A%20%0AMy%20phone%3A%20%0ABrief%20outline%3A%20"
+          >
             <span>HAVE A MATTER TO DISCUSS?</span>
             <strong>
               Let's talk <ArrowUpRight size={22} />
@@ -557,10 +560,10 @@ export default function Home() {
           <span>INTEGRITY / PREPARATION / ADVOCACY</span>
           <a href="#home">BACK TO TOP ↑</a>
         </div>
-        <p className="footer-disclaimer">
+        {/* <p className="footer-disclaimer">
           Website information is general in nature and does not create an
           advocate-client relationship. No outcome is guaranteed.
-        </p>
+        </p> */}
         <div className="developer-credit">
           <span>Developed by </span>
           <a

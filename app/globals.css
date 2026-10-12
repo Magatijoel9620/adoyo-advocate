@@ -237,3 +237,5 @@ body{font-size:15px;line-height:1.65;color:var(--ink)}
 
 :root[data-theme='dark'] .brand img,:root[data-theme='dark'] .footer-brand img{filter:invert(1);mix-blend-mode:screen;opacity:1}
 .footer-brand img{filter:invert(1);mix-blend-mode:screen;opacity:1}
+.footer-cta{background:#d2b27e;color:#17201b;border-color:transparent;transition:background .2s,color .2s}
+.footer-cta:hover{background:#ead4a9;color:#17201b}
