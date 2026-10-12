@@ -234,3 +234,6 @@ body{font-size:15px;line-height:1.65;color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.journey-card,.form-card-inner{transition:none!important}.journey-card:hover{transform:none}}
 
 .footer-brand img{filter:grayscale(1) brightness(0) invert(1);opacity:.95;mix-blend-mode:normal}
+
+:root[data-theme='dark'] .brand img,:root[data-theme='dark'] .footer-brand img{filter:invert(1);mix-blend-mode:screen;opacity:1}
+.footer-brand img{filter:invert(1);mix-blend-mode:screen;opacity:1}
