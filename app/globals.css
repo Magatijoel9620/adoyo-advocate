@@ -239,3 +239,9 @@ body{font-size:15px;line-height:1.65;color:var(--ink)}
 .footer-brand img{filter:invert(1);mix-blend-mode:screen;opacity:1}
 .footer-cta{background:#d2b27e;color:#17201b;border-color:transparent;transition:background .2s,color .2s}
 .footer-cta:hover{background:#ead4a9;color:#17201b}
+.contact-location em{font-style:normal;line-height:1.7}
+.contact-map{margin-top:8px;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+.contact-map iframe{display:block;width:100%;height:260px;border:0}
+.contact-map>a{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:12px 15px;font-size:11px;font-weight:700}
+:root[data-theme='dark'] .contact-map{background:#171d19;border-color:var(--line)}
+@media(max-width:760px){.contact-map iframe{height:230px}}

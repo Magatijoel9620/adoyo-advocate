@@ -474,11 +474,30 @@ export default function Home() {
               </span>
               <span>
                 <small>LOCATION</small>
-                <strong>Malindi, Kenya</strong>
-                <em>Exact office address to be confirmed</em>
+                <strong>Sea Breeze Plaza, Ground Floor, Door No. 5</strong>
+                <em>
+                  Opposite Ruby Plaza, off Vasco Da Gama Road.
+                  <br />
+                  P.O. Box 5034, Malindi
+                </em>
               </span>
             </div>
           </Reveal>
+          <div className="contact-map">
+            <iframe
+              src="https://maps.google.com/maps?q=Sea%20Breeze%20Plaza%2C%20Vasco%20Da%20Gama%20Road%2C%20Malindi%2C%20Kenya&output=embed"
+              title="Map to Adoyo J & Company Advocates at Sea Breeze Plaza, Malindi"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <a
+              href="https://maps.google.com/maps?q=Sea%20Breeze%20Plaza%2C%20Vasco%20Da%20Gama%20Road%2C%20Malindi%2C%20Kenya&output=embed"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open location in Google Maps <ArrowUpRight size={14} />
+            </a>
+          </div>
           <p className="contact-privacy">
             Please avoid sending sensitive documents or confidential details
             before the firm confirms how they should be shared.
