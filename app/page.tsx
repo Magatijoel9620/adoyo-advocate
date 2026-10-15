@@ -120,9 +120,9 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="hero-lede">
-              Thoughtful legal counsel and purposeful representation for the
-              matters that shape your life, work and future. Based in Malindi,
-              Kenya, with enquiries welcome from clients abroad on Kenyan-law matters.
+              Thoughtful legal counsel. Purposeful representation. Trusted guidance for the
+              decisions that shape your life, work and future. Based in Malindi, Kenya,
+              Adoyo Advocates welcomes enquiries from clients in Kenya and abroad seeking guidance on matters governed by Kenyan law.
             </p>
             <div className="hero-actions">
               <a data-magnetic className="button button-gold" href="#contact">
@@ -142,7 +142,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <div className="visual-topline">
-            <span>THE PRINCIPLE</span>
+            <span>OUR PRINCIPLE</span>
             <span>EST. MALINDI</span>
           </div>
           <div className="visual-orbit orbit-a" />
@@ -165,13 +165,13 @@ export default function Home() {
             <span>↓ EXPLORE</span>
           </div>
         </div>
-        <a
+        {/* <a
           href="#approach"
           className="scroll-cue"
           aria-label="Scroll to our approach"
         >
           <span /> SCROLL & DISCOVER
-        </a>
+        </a> */}
       </section>
 
       <section className="trust-strip" aria-label="Firm principles">
@@ -196,7 +196,7 @@ export default function Home() {
 
       <section className="approach-section section-pad" id="approach">
         <Reveal className="section-kicker">
-          <span>01 / OUR APPROACH</span>
+          <span>OUR APPROACH</span>
           <span className="kicker-line" />
           <span>THE CLIENT COMES FIRST</span>
         </Reveal>
@@ -236,7 +236,7 @@ export default function Home() {
 
       <section className="services-section section-pad" id="services">
         <Reveal className="section-kicker">
-          <span>02 / PRACTICE AREAS</span>
+          <span>PRACTICE AREAS</span>
           <span className="kicker-line" />
           <span>HOW WE CAN HELP</span>
         </Reveal>
@@ -291,7 +291,7 @@ export default function Home() {
 
       <section className="journey-section section-pad" id="how-we-work">
         <Reveal className="section-kicker">
-          <span>03 / THE PROCESS</span>
+          <span>THE PROCESS</span>
           <span className="kicker-line" />
           <span>A CLEARER NEXT STEP</span>
         </Reveal>
@@ -357,7 +357,7 @@ export default function Home() {
 
       <section className="manifesto">
         <div className="manifesto-no">
-          04 <span>— THE COMMITMENT</span>
+          <span>— THE COMMITMENT</span>
         </div>
         <Reveal className="manifesto-content">
           <p className="eyebrow">THE STANDARD WE SET</p>
@@ -383,7 +383,7 @@ export default function Home() {
 
       <section className="firm-section section-pad" id="firm">
         <Reveal className="section-kicker">
-          <span>05 / THE FIRM</span>
+          <span>THE FIRM</span>
           <span className="kicker-line" />
           <span>ADOYO J & COMPANY ADVOCATES</span>
         </Reveal>
@@ -450,7 +450,7 @@ export default function Home() {
               height={2100}
               sizes="(max-width: 760px) 100vw, 48vw"
             />
-            <figcaption><span>01 / THE WORKSPACE</span><strong>A considered space for legal work.</strong></figcaption>
+            <figcaption><span>THE WORKSPACE</span><strong>A considered space for legal work.</strong></figcaption>
           </figure>
           <figure className="office-gallery-secondary">
             <Image
@@ -460,7 +460,7 @@ export default function Home() {
               height={1200}
               sizes="(max-width: 760px) 100vw, 42vw"
             />
-            <figcaption><span>02 / CLIENT CONSULTATIONS</span><strong>Conversations begin with listening.</strong></figcaption>
+            <figcaption><span>CLIENT CONSULTATIONS</span><strong>Conversations begin with listening.</strong></figcaption>
           </figure>
         </div>
       </section>
@@ -469,7 +469,7 @@ export default function Home() {
         <div className="contact-left">
           <Reveal>
             <p className="eyebrow">
-              <span className="eyebrow-mark" /> 05 / GET IN TOUCH
+              <span className="eyebrow-mark" />GET IN TOUCH
             </p>
             <h2>
               Let's work out
@@ -556,9 +556,9 @@ export default function Home() {
           <div data-magnetic-card className="form-card-inner">
             <div className="form-card-head">
               <span>INITIAL ENQUIRY</span>
-              <span>
+              {/* <span>
                 NO. 001 <i />
-              </span>
+              </span> */}
             </div>
             <h3>
               Tell us a little
@@ -585,9 +585,11 @@ export default function Home() {
               height={53}
             />
             <p>
-              Legal counsel with clarity.
+              Legal counsel. Clear direction. Purposeful representation.
               <br />
-              Representation with purpose. Serving Malindi and clients seeking guidance on Kenyan-law matters from abroad.
+              
+
+Providing thoughtful legal guidance in Kenya and assisting clients abroad with matters governed by Kenyan law.
             </p>
             <span className="footer-location">
               <MapPin size={14} /> MALINDI, KENYA
