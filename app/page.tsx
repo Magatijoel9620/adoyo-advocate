@@ -61,8 +61,30 @@ const services = [
 ];
 
 export default function Home() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://adoyolaw.com";
+  const legalBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    name: "Adoyo J & Company Advocates",
+    url: siteUrl,
+    image: `${siteUrl}/adoyo-advocate.webp`,
+    logo: `${siteUrl}/logo.png`,
+    telephone: "+254701403467",
+    email: "adoyoadvocate@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Sea Breeze Plaza, Ground Floor, Door No. 5, off Vasco Da Gama Road",
+      addressLocality: "Malindi",
+      postOfficeBoxNumber: "5034",
+      addressCountry: "KE",
+    },
+    areaServed: [{ "@type": "Country", name: "Kenya" }],
+    availableLanguage: ["English"],
+    description: "Legal practice based in Malindi, Kenya. Enquiries from abroad are welcome for matters connected to Kenyan law.",
+  };
   return (
     <main id="home">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(legalBusinessSchema).replace(/</g, "\\u003c") }} />
       <SmoothScroll />
       <div className="utility-bar">
         <span>
@@ -82,7 +104,7 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow">
               <span className="eyebrow-mark" /> INDEPENDENT LEGAL PRACTICE{" "}
-              <span className="eyebrow-no">— 001 / KENYA</span>
+              <span className="eyebrow-no">— 003 / KENYA</span>
             </p>
           </Reveal>
           <Reveal delay={0.08}>
@@ -99,7 +121,8 @@ export default function Home() {
           <Reveal delay={0.16}>
             <p className="hero-lede">
               Thoughtful legal counsel and purposeful representation for the
-              matters that shape your life, work and future.
+              matters that shape your life, work and future. Based in Malindi,
+              Kenya, with enquiries welcome from clients abroad on Kenyan-law matters.
             </p>
             <div className="hero-actions">
               <a data-magnetic className="button button-gold" href="#contact">
@@ -367,9 +390,10 @@ export default function Home() {
         <div className="firm-layout">
           <div className="firm-portrait">
             <Image
-              src="/adoyo.jpg"
-              alt="Advocate portrait supplied for Adoyo J & Company Advocates"
+              src="/adoyo-advocate.webp"
+              alt="Adoyo J, advocate, at work in her office"
               fill
+              priority={false}
               sizes="(max-width: 760px) 100vw, 42vw"
               className="portrait-image"
             />
@@ -401,7 +425,9 @@ export default function Home() {
             <p>
               As the practice develops, our focus is to provide a considered,
               approachable legal service—one that helps clients understand their
-              options and make informed decisions.
+              options and make informed decisions. The practice is based in
+              Malindi, Kenya, and welcomes enquiries from clients in Kenya and
+              abroad who need guidance on matters connected to Kenyan law.
             </p>
             <div className="firm-signature">
               <span />
@@ -414,6 +440,28 @@ export default function Home() {
               ADVOCATE BIOGRAPHY & PROFESSIONAL DETAILS TO BE CONFIRMED
             </div> */}
           </Reveal>
+        </div>
+        <div className="office-gallery" aria-label="Inside the firm's office">
+          <figure className="office-gallery-main">
+            <Image
+              src="/adoyo-office.webp"
+              alt="Adoyo J working at her desk in the firm's office in Malindi"
+              width={1600}
+              height={2100}
+              sizes="(max-width: 760px) 100vw, 48vw"
+            />
+            <figcaption><span>01 / THE WORKSPACE</span><strong>A considered space for legal work.</strong></figcaption>
+          </figure>
+          <figure className="office-gallery-secondary">
+            <Image
+              src="/adoyo-client-meeting.webp"
+              alt="Consultation taking place inside the law office"
+              width={1600}
+              height={1200}
+              sizes="(max-width: 760px) 100vw, 42vw"
+            />
+            <figcaption><span>02 / CLIENT CONSULTATIONS</span><strong>Conversations begin with listening.</strong></figcaption>
+          </figure>
         </div>
       </section>
 
@@ -485,13 +533,14 @@ export default function Home() {
           </Reveal>
           <div className="contact-map">
             <iframe
-              src="https://maps.google.com/maps?q=Sea%20Breeze%20Plaza%2C%20Vasco%20Da%20Gama%20Road%2C%20Malindi%2C%20Kenya&output=embed"
-              title="Map to Adoyo J & Company Advocates at Sea Breeze Plaza, Malindi"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d940.118034338255!2d40.124040395021424!3d-3.223125312277043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2ske!4v1792047868521!5m2!1sen!2ske"
+              title="Google Maps location for Adoyo J & Company Advocates, Sea Breeze Plaza, Malindi, Kenya"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
             />
             <a
-              href="https://maps.google.com/maps?q=Sea%20Breeze%20Plaza%2C%20Vasco%20Da%20Gama%20Road%2C%20Malindi%2C%20Kenya&output=embed"
+              href="https://maps.app.goo.gl/DRXyySy53Q5vJuqR9"
               target="_blank"
               rel="noreferrer"
             >
@@ -538,7 +587,7 @@ export default function Home() {
             <p>
               Legal counsel with clarity.
               <br />
-              Representation with purpose.
+              Representation with purpose. Serving Malindi and clients seeking guidance on Kenyan-law matters from abroad.
             </p>
             <span className="footer-location">
               <MapPin size={14} /> MALINDI, KENYA

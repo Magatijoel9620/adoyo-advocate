@@ -1,19 +1,9 @@
-# Patch notes — Adoyo Advocates
+# Launch pass — 15 October 2026
 
-## Fixed Next.js client-only Three.js import
-
-`next/dynamic(..., { ssr: false })` must be declared from a Client Component in the App Router. The Three.js scene is now loaded by `components/SceneLoader.tsx` (`'use client'`) and rendered by `app/page.tsx` through that wrapper.
-
-## Added light/dark mode
-
-Use the Dark/Light control in the desktop navigation or the mobile menu. The selected theme is stored as `adoyo-theme` in localStorage. If no choice exists, the browser's preferred color scheme is used. The CSS palette and major surfaces update with the selected theme.
-
-## Run and verify locally
-
-```bash
-npm install
-npm run dev
-npm run build
-```
-
-The package registry was unreachable/slow in the patch workspace, so run the production build locally after applying the patch. Avoid `npm audit fix --force` unless you review the breaking dependency changes first; run `npm audit` to inspect the five reported high-severity advisories.
+- Added responsive WebP versions of the supplied advocate and office photography.
+- Added a two-image office/client-consultation gallery and expanded firm copy to explain the practice's Kenya focus and overseas enquiry pathway without claiming international-law coverage.
+- Updated the map iframe to the exact supplied Google Maps embed and the external directions link to the supplied short link.
+- Added favicon, PNG icon and Apple touch icon derived from `public/logo.png`.
+- Added canonical metadata, social preview metadata, LegalService JSON-LD, `robots.txt` generation and `sitemap.xml` generation.
+- The `.com` hostname was not included in the supplied project or message; `https://adoyolaw.com` is a configurable default and must be replaced with the exact registered hostname if different.
+- Validation must be completed with `npm ci`, `npm run lint` and `npm run build` in an environment with package registry access.
