@@ -579,10 +579,10 @@ export default function Home() {
         <div className="footer-main">
           <div className="footer-brand">
             <Image
-              src="/logo-landscape.png"
+              src="/logo-landscape-trimmed.png"
               alt="Adoyo J & Company Advocates"
               width={235}
-              height={53}
+              height={52}
             />
             <p>
               Legal counsel. Clear direction. Purposeful representation.

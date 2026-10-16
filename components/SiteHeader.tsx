@@ -54,10 +54,10 @@ export default function SiteHeader() {
         aria-label="Adoyo J & Company Advocates home"
       >
         <Image
-          src="/logo-landscape.png"
+          src="/logo-landscape-trimmed.png"
           alt="Adoyo J & Company Advocates"
-          width={220}
-          height={49}
+          width={228}
+          height={50}
           priority
         />
       </a>
