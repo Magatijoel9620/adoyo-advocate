@@ -17,6 +17,7 @@
     "next": "^16.4.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "resend": "^6.33.0",
     "three": "^0.182.0"
   },
   "devDependencies": {

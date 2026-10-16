@@ -1,51 +1,89 @@
+
 "use client";
 
 import { FormEvent, useState } from "react";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, LoaderCircle } from "lucide-react";
 
-const EMAIL = "adoyoadvocate@gmail.com";
+const SERVICES = [
+  "Criminal law & defence",
+  "Conveyancing & property",
+  "Employment & labour",
+  "Road traffic accident claims",
+  "General legal enquiry",
+] as const;
+
+type SubmissionStatus = "idle" | "sending" | "success" | "error";
 
 export default function EnquiryForm() {
-  const [ready, setReady] = useState(false);
+  const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-    setReady(false);
 
     const form = event.currentTarget;
+
     if (!form.reportValidity()) return;
 
     const data = new FormData(form);
-    const name = String(data.get("name") || "").trim();
-    const phone = String(data.get("phone") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    const service = String(data.get("service") || "General legal enquiry");
-    const message = String(data.get("message") || "").trim();
+    const payload = {
+      name: String(data.get("name") || "").trim(),
+      phone: String(data.get("phone") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      service: String(data.get("service") || ""),
+      message: String(data.get("message") || "").trim(),
+    };
 
-    if (name.length < 2 || phone.length < 7 || message.length < 10) {
+    if (
+      payload.name.length < 2 ||
+      payload.phone.length < 7 ||
+      payload.phone.length > 24 ||
+      payload.message.length < 10
+    ) {
+      setStatus("error");
       setError(
-        "Please add your name, a reachable phone number and a short message (at least 10 characters).",
+        "Please provide your name, a reachable phone number and a message of at least 10 characters.",
       );
       return;
     }
 
-    const subject = `Website enquiry: ${service}`;
-    const body = `Hello Adoyo J & Company Advocates,
+    if (!SERVICES.includes(payload.service as (typeof SERVICES)[number])) {
+      setStatus("error");
+      setError("Please select a valid area of assistance.");
+      return;
+    }
 
-My name is ${name}.
-Phone: ${phone}${email ? `\nEmail: ${email}` : ""}
-Area of assistance: ${service}
+    setStatus("sending");
 
-Enquiry: ${message}
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-Please let me know how I may proceed.`;
+      const result = (await response.json().catch(() => ({}))) as {
+        error?: string;
+      };
 
-    const mailtoUrl = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (!response.ok) {
+        throw new Error(
+          result.error ||
+            "We couldn't submit your enquiry. Please try again.",
+        );
+      }
 
-    setReady(true);
-    window.location.href = mailtoUrl;
+      form.reset();
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.",
+      );
+    }
   }
 
   return (
@@ -60,6 +98,7 @@ Please let me know how I may proceed.`;
             minLength={2}
             maxLength={100}
             placeholder="Your name"
+            disabled={status === "sending"}
           />
         </label>
 
@@ -67,12 +106,14 @@ Please let me know how I may proceed.`;
           Phone number
           <input
             name="phone"
+            type="tel"
             autoComplete="tel"
             inputMode="tel"
             required
             minLength={7}
             maxLength={24}
             placeholder="+254 7xx xxx xxx or your country code"
+            disabled={status === "sending"}
           />
         </label>
       </div>
@@ -85,20 +126,26 @@ Please let me know how I may proceed.`;
           autoComplete="email"
           maxLength={160}
           placeholder="you@example.com"
+          disabled={status === "sending"}
         />
       </label>
 
       <label>
         What can we help with?
-        <select name="service" defaultValue="" required>
+        <select
+          name="service"
+          defaultValue=""
+          required
+          disabled={status === "sending"}
+        >
           <option value="" disabled>
             Select an area
           </option>
-          <option>Criminal law &amp; defence</option>
-          <option>Conveyancing &amp; property</option>
-          <option>Employment &amp; labour</option>
-          <option>Road traffic accident claims</option>
-          <option>General legal enquiry</option>
+          {SERVICES.map((service) => (
+            <option key={service} value={service}>
+              {service}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -111,29 +158,43 @@ Please let me know how I may proceed.`;
           maxLength={2000}
           required
           placeholder="A short overview is enough for this first contact."
+          disabled={status === "sending"}
         />
       </label>
 
-      <button className="button button-gold form-submit" type="submit">
-        Prepare email <ArrowUpRight size={17} />
+      <button
+        className="button button-gold form-submit"
+        type="submit"
+        disabled={status === "sending"}
+      >
+        {status === "sending" ? (
+          <>
+            Sending <LoaderCircle size={17} className="spin" />
+          </>
+        ) : (
+          <>
+            Send enquiry <ArrowUpRight size={17} />
+          </>
+        )}
       </button>
 
       <p className="form-note">
-        Your details are not stored by this website. This form prepares an
-        email in your default email application; review and send it yourself.
-        Please do not include confidential or time-critical details.
+        Your enquiry will be sent to Adoyo Advocates by email. Please avoid
+        including confidential documents or sensitive details in this initial
+        message. Do not use this form for urgent or time-critical matters.
       </p>
 
-      {error && (
+      {status === "error" && (
         <p className="form-feedback form-error" role="alert">
           {error}
         </p>
       )}
 
-      {ready && (
+      {status === "success" && (
         <p className="form-feedback" role="status">
-          <CheckCircle2 size={16} /> Your email draft is being opened. Review it
-          and press Send to contact the firm.
+          <CheckCircle2 size={16} />
+          Your enquiry has been submitted. Thank you for contacting Adoyo
+          Advocates.
         </p>
       )}
     </form>
