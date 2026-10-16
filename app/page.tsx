@@ -21,6 +21,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
 
+const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
+  "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
+)}`;
+
 const services = [
   {
     n: "01",
@@ -649,7 +653,7 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
       <a
         data-magnetic
         className="floating-contact"
-        href="https://wa.me/254701403467"
+        href={whatsappContactUrl}
         target="_blank"
         rel="noreferrer"
         aria-label="Contact the firm on WhatsApp"
