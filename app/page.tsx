@@ -69,6 +69,7 @@ export default function Home() {
   const legalBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LegalService",
+    "@id": `${siteUrl.replace(/\/$/, "")}/#legalservice`,
     name: "Adoyo J & Company Advocates",
     url: siteUrl,
     image: `${siteUrl}/adoyo-advocate.webp`,
@@ -79,10 +80,14 @@ export default function Home() {
       "@type": "PostalAddress",
       streetAddress: "Sea Breeze Plaza, Ground Floor, Door No. 5, off Vasco Da Gama Road",
       addressLocality: "Malindi",
+      addressRegion: "Kilifi County",
       postOfficeBoxNumber: "5034",
       addressCountry: "KE",
     },
-    areaServed: [{ "@type": "Country", name: "Kenya" }],
+    areaServed: [
+      { "@type": "City", name: "Malindi" },
+      { "@type": "Country", name: "Kenya" },
+    ],
     availableLanguage: ["English"],
     description: "Legal practice based in Malindi, Kenya. Enquiries from abroad are welcome for matters connected to Kenyan law.",
   };

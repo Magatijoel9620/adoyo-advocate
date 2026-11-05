@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import InteractionEffects from '@/components/InteractionEffects';
 
-// Set NEXT_PUBLIC_SITE_URL to the exact .com domain before production deployment.
+// Firm-confirmed canonical production domain; override only for a different deployment environment.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://adoyolaw.com';
 
 export const metadata: Metadata = {
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     locale: 'en_KE',
     siteName: 'Adoyo J & Company Advocates',
     url: '/',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Adoyo J & Company Advocates' }],
+    images: [{ url: '/og-image.png', width: 1733, height: 907, alt: 'Adoyo J & Company Advocates' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Adoyo J & Company Advocates',
     description: 'Thoughtful legal counsel from Malindi, Kenya. Enquiries welcome for matters connected to Kenyan law.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   icons: {
     icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/favicon.png', type: 'image/png', sizes: '64x64' }],
