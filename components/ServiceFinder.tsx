@@ -59,9 +59,9 @@ export default function ServiceFinder() {
           What brings you <em>here today?</em>
         </h3>
         <p>
-          Choose the description that feels closest. This guide only helps direct
-          your enquiry to an area of practice; it does not assess your legal position.
-        </p>
+  Pick the option that best matches what you need help with. Not sure?
+  That’s okay — we’ll help you find the right place to start.
+</p>
       </div>
       <div className="finder-options" role="group" aria-label="Choose the kind of legal enquiry">
         {options.map((option) => {
