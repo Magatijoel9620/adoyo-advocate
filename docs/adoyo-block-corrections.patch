@@ -1,0 +1,220 @@
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -1,19 +1,20 @@
+ @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
+ :root {
+   /* Adoyo Law — Contemporary Coastal Authority design tokens */
+-  --brand-forest: #173b35;
+-  --brand-forest-deep: #102923;
+-  --brand-brass: #d1ad72;
+-  --brand-brass-soft: #e3c99c;
+-  --brand-ivory: #f5f0e5;
++  --brand-forest: #1d2422;
++  --brand-forest-deep: #151b19;
++  --brand-brass: #c3a16b;
++  --brand-brass-soft: #ddc79f;
++  --brand-ivory: #faf8f2;
+   --brand-sea-glass: #76a9a0;
+   --brand-terracotta: #c77c60;
+ 
+-  --color-text: #202722;
+-  --color-text-muted: #626a61;
+-  --color-surface: #f5f2ea;
+-  --color-surface-raised: #fffdf7;
+-  --color-border: rgba(32, 39, 34, 0.18);
++  /* Preserve the original light theme's proven text/surface contrast. */
++  --color-text: #242723;
++  --color-text-muted: #73776f;
++  --color-surface: #f2efe7;
++  --color-surface-raised: #faf8f2;
++  --color-border: rgba(36, 39, 35, 0.17);
+   --color-focus: var(--brand-sea-glass);
+ 
+   --font-mono: "DM Mono", monospace;
+@@ -21,7 +22,7 @@
+   --font-display: "Playfair Display", Georgia, serif;
+   --font-heading: "Manrope", sans-serif;
+ 
+-  --radius-control: 10px;
++  --radius-control: 999px;
+   --radius-card: 18px;
+   --radius-panel: 24px;
+   --shadow-soft: 0 12px 35px rgba(8, 14, 11, 0.08);
+@@ -3619,3 +3620,95 @@
+     padding: 8px;
+   }
+ }
++
++
++/* Block C — restore original light palette, rounded controls and improve cursor feedback */
++:root:not([data-theme="dark"]) {
++  --ink: #242723;
++  --deep: #1d2422;
++  --deep2: #2a312d;
++  --paper: #f2efe7;
++  --white: #faf8f2;
++  --gold: #c3a16b;
++  --gold2: #ddc79f;
++  --muted: #73776f;
++  --line: rgba(36, 39, 35, 0.17);
++  --color-text: #242723;
++  --color-text-muted: #73776f;
++  --color-surface: #f2efe7;
++  --color-surface-raised: #faf8f2;
++  --color-border: rgba(36, 39, 35, 0.17);
++}
++
++/* Keep the site's original rounded-pill action language consistent. */
++button,
++.button,
++a.button,
++.header-cta,
++.mobile-nav-cta,
++.floating-contact,
++.finder-result-actions a {
++  border-radius: 999px;
++}
++.finder-option {
++  border-radius: 16px;
++}
++.finder-whatsapp-cta {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  gap: 10px;
++  min-height: 46px;
++  padding: 12px 21px;
++  background: #25d366;
++  color: #10251a !important;
++  font-size: 12px !important;
++  font-weight: 800 !important;
++  text-decoration: none !important;
++  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
++  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
++}
++.finder-whatsapp-cta:hover {
++  transform: translateY(-2px);
++  background: #49df80;
++  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
++}
++.finder-form-link {
++  color: rgba(250, 248, 242, 0.82) !important;
++  text-decoration: none !important;
++}
++.finder-form-link span {
++  color: var(--brand-brass-soft);
++  text-decoration: underline;
++  text-underline-offset: 3px;
++}
++
++/* A restrained cursor glow: ambient light, not a full-screen flashlight effect. */
++.cursor-glow {
++  position: fixed;
++  top: 0;
++  left: 0;
++  width: 190px;
++  height: 190px;
++  margin: -95px 0 0 -95px;
++  border-radius: 50%;
++  pointer-events: none;
++  z-index: 9998;
++  opacity: 0.2;
++  background: radial-gradient(circle, rgba(209, 173, 114, 0.23) 0%, rgba(118, 169, 160, 0.11) 32%, rgba(118, 169, 160, 0) 72%);
++  mix-blend-mode: screen;
++  will-change: transform;
++  transition: opacity 0.25s ease;
++}
++.cursor-glow.cursor-active { opacity: 0.34; }
++:root[data-theme="dark"] .cursor-glow {
++  background: radial-gradient(circle, rgba(227, 201, 156, 0.28) 0%, rgba(118, 169, 160, 0.16) 34%, rgba(118, 169, 160, 0) 72%);
++  opacity: 0.26;
++}
++@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
++  .cursor-glow { display: none; }
++}
++@media (max-width: 760px) {
++  .finder-result-actions { align-items: stretch; }
++  .finder-whatsapp-cta { width: 100%; }
++}
+--- a/components/ServiceFinder.tsx
++++ b/components/ServiceFinder.tsx
+@@ -51,14 +51,6 @@
+ export default function ServiceFinder() {
+   const [selected, setSelected] = useState<(typeof options)[number] | null>(null);
+ 
+-  function continueToEnquiry() {
+-    if (!selected) return;
+-    window.dispatchEvent(
+-      new CustomEvent("adoyo:service-selected", { detail: selected.service }),
+-    );
+-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+-  }
+-
+   return (
+     <div className="service-finder" aria-labelledby="service-finder-title">
+       <div className="service-finder-intro">
+@@ -99,15 +91,17 @@
+             <span>YOUR SELECTED AREA</span>
+             <strong>{selected.service}</strong>
+             <div className="finder-result-actions">
+-              <button type="button" onClick={continueToEnquiry}>
+-                Continue to enquiry <ArrowUpRight size={16} />
+-              </button>
+               <a
++                className="finder-whatsapp-cta"
+                 href={`https://wa.me/254701403467?text=${encodeURIComponent(`Hello, I would like to make an enquiry about ${selected.service}. Could you please guide me on the next step?`)}`}
+                 target="_blank"
+-                rel="noreferrer"
++                rel="noopener noreferrer"
++                aria-label={`Start a WhatsApp enquiry about ${selected.service}`}
+               >
+-                WhatsApp the firm <ArrowUpRight size={15} />
++                Continue on WhatsApp <ArrowUpRight size={16} />
++              </a>
++              <a className="finder-form-link" href="#contact">
++                Prefer the enquiry form? <span>Go to contact</span>
+               </a>
+             </div>
+           </>
+--- a/components/InteractionEffects.tsx
++++ b/components/InteractionEffects.tsx
+@@ -11,7 +11,10 @@
+     const cursor = document.createElement('div');
+     cursor.className = 'cursor-accent';
+     cursor.setAttribute('aria-hidden', 'true');
+-    document.body.appendChild(cursor);
++    const glow = document.createElement('div');
++    glow.className = 'cursor-glow';
++    glow.setAttribute('aria-hidden', 'true');
++    document.body.append(cursor, glow);
+     let raf = 0;
+     let x = -100;
+     let y = -100;
+@@ -19,13 +22,17 @@
+       x = event.clientX;
+       y = event.clientY;
+       if (!raf) raf = window.requestAnimationFrame(() => {
+-        cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
++        const position = `translate3d(${x}px, ${y}px, 0)`;
++        cursor.style.transform = position;
++        glow.style.transform = position;
+         raf = 0;
+       });
+     };
+     const interactive = (event: Event) => {
+       const target = event.target as Element | null;
+-      cursor.classList.toggle('cursor-active', !!target?.closest('a, button, [data-magnetic]'));
++      const active = !!target?.closest('a, button, [data-magnetic]');
++      cursor.classList.toggle('cursor-active', active);
++      glow.classList.toggle('cursor-active', active);
+     };
+     window.addEventListener('mousemove', move, { passive: true });
+     document.addEventListener('pointerover', interactive, { passive: true });
+@@ -58,6 +65,7 @@
+       cleanups.forEach((cleanup) => cleanup());
+       if (raf) window.cancelAnimationFrame(raf);
+       cursor.remove();
++      glow.remove();
+     };
+   }, []);
+   return null;

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
 :root {
-  /* Original Adoyo palette retained for reliable contrast in both themes. */
+  /* Original Adoyo Law light palette, restored from the supplied backup. */
   --brand-forest: #1d2422;
   --brand-forest-deep: #1d2422;
   --brand-brass: #c3a16b;
@@ -28,6 +28,7 @@
   --shadow-raised: 0 18px 48px rgba(20, 28, 23, 0.13);
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 
+  /* Original aliases keep every legacy component on its proven palette. */
   --ink: #242723;
   --deep: #1d2422;
   --deep2: #2a312d;
@@ -1638,8 +1639,9 @@ textarea:focus-visible {
   cursor: pointer;
 }
 :root[data-theme="dark"] {
+  /* Original Adoyo Law dark palette, restored from the supplied backup. */
   --brand-forest: #111715;
-  --brand-forest-deep: #0c100f;
+  --brand-forest-deep: #111715;
   --brand-brass: #c3a16b;
   --brand-brass-soft: #e0c99f;
   --brand-ivory: #f4f0e5;
@@ -3737,3 +3739,131 @@ a.button,
     transition: none;
   }
 }
+
+/* Theme restoration: Adoyo's original light and dark colour systems.
+   Keep the original palette; do not let the conversion-uplift accents
+   replace the firm's established forest, ivory and brass identity. */
+:root {
+  --ink: #242723;
+  --deep: #1d2422;
+  --deep2: #2a312d;
+  --paper: #f2efe7;
+  --white: #faf8f2;
+  --gold: #c3a16b;
+  --gold2: #ddc79f;
+  --muted: #73776f;
+  --line: rgba(36, 39, 35, 0.17);
+
+  --brand-forest: #1d2422;
+  --brand-forest-deep: #1d2422;
+  --brand-brass: #c3a16b;
+  --brand-brass-soft: #ddc79f;
+  --brand-ivory: #faf8f2;
+  --brand-sea-glass: #c3a16b;
+  --brand-terracotta: #c3a16b;
+
+  --color-text: #242723;
+  --color-text-muted: #73776f;
+  --color-surface: #f2efe7;
+  --color-surface-raised: #faf8f2;
+  --color-border: rgba(36, 39, 35, 0.17);
+  --color-focus: #c3a16b;
+}
+
+/* Original dark palette, applied consistently to both semantic and legacy tokens. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e8e8df;
+  --deep: #111715;
+  --deep2: #1b2420;
+  --paper: #171d1a;
+  --white: #f4f0e5;
+  --gold: #c3a16b;
+  --gold2: #e0c99f;
+  --muted: #a1a79d;
+  --line: rgba(232, 232, 223, 0.17);
+
+  --brand-forest: #111715;
+  --brand-forest-deep: #111715;
+  --brand-brass: #c3a16b;
+  --brand-brass-soft: #e0c99f;
+  --brand-ivory: #f4f0e5;
+  --brand-sea-glass: #c3a16b;
+  --brand-terracotta: #c3a16b;
+
+  --color-text: #e8e8df;
+  --color-text-muted: #a1a79d;
+  --color-surface: #171d1a;
+  --color-surface-raised: #1b2420;
+  --color-border: rgba(232, 232, 223, 0.17);
+  --color-focus: #e0c99f;
+}
+
+/* The contact section must remain light in light mode and dark in dark mode.
+   A previous unconditional uplift rule forced a dark background in both themes. */
+:root:not([data-theme="dark"]) .contact-section {
+  background: #e4e0d5;
+  color: #242723;
+}
+:root:not([data-theme="dark"]) .contact-left h2 {
+  color: #242723;
+}
+:root:not([data-theme="dark"]) .contact-left h2 em {
+  color: #a17b40;
+}
+:root:not([data-theme="dark"]) .contact-lede {
+  color: #505950;
+}
+:root:not([data-theme="dark"]) .contact-links small,
+:root:not([data-theme="dark"]) .contact-location small {
+  color: #60695f;
+}
+
+:root[data-theme="dark"] .contact-section {
+  background: #171d1a;
+  color: #e8e8df;
+}
+:root[data-theme="dark"] .contact-left h2 {
+  color: #e8e8df;
+}
+:root[data-theme="dark"] .contact-left h2 em {
+  color: #e0c99f;
+}
+:root[data-theme="dark"] .contact-lede,
+:root[data-theme="dark"] .contact-privacy {
+  color: #a1a79d;
+}
+:root[data-theme="dark"] .contact-links small,
+:root[data-theme="dark"] .contact-location small {
+  color: #a1a79d;
+}
+:root[data-theme="dark"] .contact-links > a,
+:root[data-theme="dark"] .contact-location {
+  border-color: rgba(232, 232, 223, 0.17);
+}
+:root[data-theme="dark"] .contact-form-card {
+  background: #1b2420;
+  color: #e8e8df;
+  border: 1px solid rgba(232, 232, 223, 0.17);
+}
+:root[data-theme="dark"] .contact-form-card h3 {
+  color: #f4f0e5;
+}
+:root[data-theme="dark"] .contact-form-card > p,
+:root[data-theme="dark"] .form-card-head,
+:root[data-theme="dark"] .form-card-bottom,
+:root[data-theme="dark"] .enquiry-form label {
+  color: #c5c9bf;
+}
+:root[data-theme="dark"] .enquiry-form input,
+:root[data-theme="dark"] .enquiry-form select,
+:root[data-theme="dark"] .enquiry-form textarea {
+  background: #171d1a;
+  color: #f4f0e5;
+  border-color: rgba(232, 232, 223, 0.2);
+}
+:root[data-theme="dark"] .enquiry-form input::placeholder,
+:root[data-theme="dark"] .enquiry-form textarea::placeholder {
+  color: #a1a79d;
+}
+
