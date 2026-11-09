@@ -11,7 +11,10 @@ export default function InteractionEffects() {
     const cursor = document.createElement('div');
     cursor.className = 'cursor-accent';
     cursor.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(cursor);
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.append(cursor, glow);
     let raf = 0;
     let x = -100;
     let y = -100;
@@ -19,13 +22,17 @@ export default function InteractionEffects() {
       x = event.clientX;
       y = event.clientY;
       if (!raf) raf = window.requestAnimationFrame(() => {
-        cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        const position = `translate3d(${x}px, ${y}px, 0)`;
+        cursor.style.transform = position;
+        glow.style.transform = position;
         raf = 0;
       });
     };
     const interactive = (event: Event) => {
       const target = event.target as Element | null;
-      cursor.classList.toggle('cursor-active', !!target?.closest('a, button, [data-magnetic]'));
+      const active = !!target?.closest('a, button, [data-magnetic]');
+      cursor.classList.toggle('cursor-active', active);
+      glow.classList.toggle('cursor-active', active);
     };
     window.addEventListener('mousemove', move, { passive: true });
     document.addEventListener('pointerover', interactive, { passive: true });
@@ -58,6 +65,7 @@ export default function InteractionEffects() {
       cleanups.forEach((cleanup) => cleanup());
       if (raf) window.cancelAnimationFrame(raf);
       cursor.remove();
+      glow.remove();
     };
   }, []);
   return null;

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ArrowUpRight, CheckCircle2, LoaderCircle } from "lucide-react";
 
 const SERVICES = [
@@ -17,6 +17,18 @@ type SubmissionStatus = "idle" | "sending" | "success" | "error";
 export default function EnquiryForm() {
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [error, setError] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+
+  useEffect(() => {
+    function handleServiceSelection(event: Event) {
+      const customEvent = event as CustomEvent<string>;
+      if (SERVICES.includes(customEvent.detail as (typeof SERVICES)[number])) {
+        setSelectedService(customEvent.detail);
+      }
+    }
+    window.addEventListener("adoyo:service-selected", handleServiceSelection);
+    return () => window.removeEventListener("adoyo:service-selected", handleServiceSelection);
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,6 +87,7 @@ export default function EnquiryForm() {
       }
 
       form.reset();
+      setSelectedService("");
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -134,7 +147,8 @@ export default function EnquiryForm() {
         What can we help with?
         <select
           name="service"
-          defaultValue=""
+          value={selectedService}
+          onChange={(event) => setSelectedService(event.target.value)}
           required
           disabled={status === "sending"}
         >

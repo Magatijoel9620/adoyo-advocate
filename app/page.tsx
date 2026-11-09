@@ -20,6 +20,8 @@ import EnquiryForm from "@/components/EnquiryForm";
 import SmoothScroll from "@/components/SmoothScroll";
 import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
+import ServiceFinder from "@/components/ServiceFinder";
+import ServiceEnquiryLink from "@/components/ServiceEnquiryLink";
 
 const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
   "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
@@ -210,7 +212,7 @@ export default function Home() {
           <span>THE CLIENT COMES FIRST</span>
         </Reveal>
         <div className="approach-layout">
-          <Reveal>
+          <Reveal heading>
             <h2>
               Good legal work
               <br />
@@ -250,7 +252,7 @@ export default function Home() {
           <span>HOW WE CAN HELP</span>
         </Reveal>
         <div className="services-heading">
-          <Reveal>
+          <Reveal heading>
             <h2>
               Focused where
               <br />
@@ -264,6 +266,7 @@ export default function Home() {
             </p>
           </Reveal>
         </div>
+        <ServiceFinder />
         <div className="service-list">
           {services.map((s) => {
             const Icon = s.icon;
@@ -284,9 +287,7 @@ export default function Home() {
                 </div>
                 <div className="service-detail">
                   <p>{s.detail}</p>
-                  <a href={`#contact`} aria-label={`Enquire about ${s.title}`}>
-                    <ArrowUpRight size={20} />
-                  </a>
+                  <ServiceEnquiryLink service={s.n === "04" ? "Road traffic accident claims" : s.title} label={`Enquire about ${s.title}`} />
                 </div>
               </Reveal>
             );
@@ -305,7 +306,7 @@ export default function Home() {
           <span>A CLEARER NEXT STEP</span>
         </Reveal>
         <div className="journey-intro">
-          <Reveal>
+          <Reveal heading>
             <h2>
               A considered approach
               <br />
@@ -368,7 +369,7 @@ export default function Home() {
         <div className="manifesto-no">
           <span>— THE COMMITMENT</span>
         </div>
-        <Reveal className="manifesto-content">
+        <Reveal className="manifesto-content" heading>
           <p className="eyebrow">THE STANDARD WE SET</p>
           <h2>
             Not just answers.
@@ -415,7 +416,7 @@ export default function Home() {
               AJ<span>&</span>CO.
             </div>
           </div>
-          <Reveal className="firm-copy" delay={0.1}>
+          <Reveal className="firm-copy" delay={0.1} heading>
             <p className="eyebrow">A GROWING PRACTICE IN MALINDI</p>
             <h2>
               Professional.
@@ -476,7 +477,7 @@ export default function Home() {
 
       <section className="contact-section" id="contact">
         <div className="contact-left">
-          <Reveal>
+          <Reveal heading>
             <p className="eyebrow">
               <span className="eyebrow-mark" />GET IN TOUCH
             </p>
@@ -561,7 +562,7 @@ export default function Home() {
             before the firm confirms how they should be shared.
           </p>
         </div>
-        <Reveal className="contact-form-card" delay={0.12}>
+        <Reveal className="contact-form-card" delay={0.12} heading>
           <div data-magnetic-card className="form-card-inner">
             <div className="form-card-head">
               <span>INITIAL ENQUIRY</span>
