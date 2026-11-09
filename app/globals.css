@@ -1,5 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
 :root {
+  /* Original Adoyo Law light palette, restored from the supplied backup. */
+  --brand-forest: #1d2422;
+  --brand-forest-deep: #1d2422;
+  --brand-brass: #c3a16b;
+  --brand-brass-soft: #ddc79f;
+  --brand-ivory: #faf8f2;
+  --brand-sea-glass: #c3a16b;
+  --brand-terracotta: #c3a16b;
+
+  --color-text: #242723;
+  --color-text-muted: #73776f;
+  --color-surface: #f2efe7;
+  --color-surface-raised: #faf8f2;
+  --color-border: rgba(36, 39, 35, 0.17);
+  --color-focus: #c3a16b;
+
+  --font-mono: "DM Mono", monospace;
+  --font-body: "DM Sans", sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-heading: "Manrope", sans-serif;
+
+  --radius-control: 999px;
+  --radius-card: 18px;
+  --radius-panel: 24px;
+  --shadow-soft: 0 12px 35px rgba(8, 14, 11, 0.08);
+  --shadow-raised: 0 18px 48px rgba(20, 28, 23, 0.13);
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Original aliases keep every legacy component on its proven palette. */
   --ink: #242723;
   --deep: #1d2422;
   --deep2: #2a312d;
@@ -9,10 +38,10 @@
   --gold2: #ddc79f;
   --muted: #73776f;
   --line: rgba(36, 39, 35, 0.17);
-  --mono: "DM Mono", monospace;
-  --sans: "DM Sans", sans-serif;
-  --display: "Playfair Display", Georgia, serif;
-  --head: "Manrope", sans-serif;
+  --mono: var(--font-mono);
+  --sans: var(--font-body);
+  --display: var(--font-display);
+  --head: var(--font-heading);
 }
 * {
   box-sizing: border-box;
@@ -1610,6 +1639,22 @@ textarea:focus-visible {
   cursor: pointer;
 }
 :root[data-theme="dark"] {
+  /* Original Adoyo Law dark palette, restored from the supplied backup. */
+  --brand-forest: #111715;
+  --brand-forest-deep: #111715;
+  --brand-brass: #c3a16b;
+  --brand-brass-soft: #e0c99f;
+  --brand-ivory: #f4f0e5;
+  --brand-sea-glass: #c3a16b;
+  --brand-terracotta: #c3a16b;
+
+  --color-text: #e8e8df;
+  --color-text-muted: #a1a79d;
+  --color-surface: #171d1a;
+  --color-surface-raised: #1b2420;
+  --color-border: rgba(232, 232, 223, 0.17);
+  --color-focus: #e0c99f;
+
   --ink: #e8e8df;
   --deep: #111715;
   --deep2: #1b2420;
@@ -1930,13 +1975,6 @@ body {
 }
 
 /* Premium polish pass — softer geometry, clearer contrast, restrained depth */
-:root {
-  --ink: #202722;
-  --paper: #f5f2ea;
-  --white: #fffdf7;
-  --muted: #626a61;
-  --line: rgba(32, 39, 34, 0.18);
-}
 body {
   font-size: 15px;
   line-height: 1.65;
@@ -2449,13 +2487,6 @@ body {
 }
 
 /* Dark mode: explicitly readable foregrounds across light and dark section surfaces */
-:root[data-theme="dark"] {
-  --ink: #f0f1e9;
-  --paper: #171d19;
-  --white: #f7f5ed;
-  --muted: #b7c0b5;
-  --line: rgba(232, 235, 225, 0.17);
-}
 :root[data-theme="dark"] body {
   background: #171d19;
   color: #f0f1e9;
@@ -3086,3 +3117,753 @@ body {
   filter: saturate(0.72);
   mask-image: radial-gradient(ellipse, #000 48%, transparent 82%);
 }
+
+/* --------------------------------------------------------------------------
+   Block B — visual and conversion experience uplift
+   Contemporary Coastal Authority: editorial rhythm, tactile surfaces and
+   accessible interaction states. Existing class names remain supported.
+   -------------------------------------------------------------------------- */
+:root {
+  --color-surface-soft: #ece7da;
+  --color-surface-tint: #e5eee9;
+  --color-accent-warm: #c77c60;
+}
+
+.utility-bar {
+  background: var(--brand-forest-deep);
+}
+.site-header {
+  box-shadow: 0 8px 28px rgba(16, 41, 35, 0.035);
+  transition: transform 0.35s var(--ease-standard), background 0.25s ease;
+}
+.site-header.header-hidden {
+  transform: translateY(-110%);
+}
+.desktop-nav a {
+  position: relative;
+  padding: 10px 0;
+}
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 2px;
+  height: 1px;
+  background: var(--brand-brass);
+  transition: right 0.25s var(--ease-standard);
+}
+.desktop-nav a:hover::after,
+.desktop-nav a:focus-visible::after {
+  right: 0;
+}
+.header-cta,
+.button,
+.mobile-nav-cta {
+  border-radius: 3px;
+}
+.hero {
+  background:
+    radial-gradient(ellipse at 15% 90%, rgba(118, 169, 160, 0.13), transparent 35%),
+    linear-gradient(125deg, var(--brand-forest-deep), var(--brand-forest) 72%, #244a41);
+}
+.hero:before {
+  background:
+    radial-gradient(ellipse at 76% 48%, rgba(209, 173, 114, 0.18), transparent 39%),
+    linear-gradient(90deg, rgba(16, 41, 35, 0.96), rgba(16, 41, 35, 0.72) 54%, rgba(16, 41, 35, 0.28));
+}
+.hero-copy h1 {
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.hero-copy h1 em,
+.approach-layout h2 em,
+.services-heading h2 em,
+.journey-intro h2 em,
+.contact-left h2 em {
+  color: var(--brand-brass-soft);
+}
+.hero-lede {
+  max-width: 590px;
+  line-height: 1.85;
+}
+.hero-actions {
+  gap: 22px;
+}
+.button-gold {
+  box-shadow: 0 9px 24px rgba(209, 173, 114, 0.14);
+  transition: transform 0.25s var(--ease-standard), box-shadow 0.25s ease, background 0.25s ease;
+}
+.button-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(209, 173, 114, 0.22);
+}
+.trust-strip {
+  background: var(--brand-ivory);
+  border-bottom: 1px solid rgba(23, 59, 53, 0.1);
+}
+.trust-strip > div {
+  transition: transform 0.25s var(--ease-standard);
+}
+.trust-strip > div:hover {
+  transform: translateY(-3px);
+}
+.trust-strip svg {
+  color: var(--brand-forest);
+}
+.approach-section {
+  background:
+    radial-gradient(circle at 92% 12%, rgba(118, 169, 160, 0.11), transparent 26%),
+    var(--paper);
+}
+.approach-stamp {
+  border-color: rgba(209, 173, 114, 0.65);
+  background: var(--brand-forest);
+  color: var(--brand-ivory);
+  box-shadow: 0 16px 36px rgba(16, 41, 35, 0.13);
+}
+.services-section {
+  background: var(--brand-ivory);
+}
+.services-heading > div + div,
+.services-heading > p {
+  max-width: 430px;
+  line-height: 1.85;
+}
+.service-row {
+  border-top-color: rgba(23, 59, 53, 0.16);
+  transition: background 0.25s ease, padding 0.3s var(--ease-standard), border-color 0.25s ease;
+}
+.service-row:hover {
+  background: rgba(118, 169, 160, 0.09);
+  border-color: rgba(23, 59, 53, 0.3);
+}
+.service-icon {
+  background: rgba(23, 59, 53, 0.08);
+  color: var(--brand-forest);
+  border-radius: 50%;
+  transition: transform 0.3s var(--ease-standard), background 0.25s ease;
+}
+.service-row:hover .service-icon {
+  transform: rotate(-7deg) scale(1.06);
+  background: rgba(209, 173, 114, 0.26);
+}
+.service-tags span {
+  border-radius: 99px;
+  background: rgba(23, 59, 53, 0.055);
+  border: 1px solid rgba(23, 59, 53, 0.1);
+}
+.service-detail a {
+  background: var(--brand-forest);
+  color: var(--brand-ivory);
+  border-radius: 50%;
+  transition: transform 0.25s var(--ease-standard), background 0.25s ease;
+}
+.service-detail a:hover {
+  transform: translate(3px, -3px);
+  background: #315d52;
+}
+.service-finder {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  gap: 30px 6%;
+  margin: 54px 0 48px;
+  padding: clamp(24px, 4vw, 46px);
+  background: var(--brand-forest);
+  color: var(--brand-ivory);
+  border-radius: 5px 34px 5px 34px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.service-finder::after {
+  content: "AJ";
+  position: absolute;
+  z-index: -1;
+  right: 2%;
+  bottom: -34%;
+  color: rgba(245, 240, 229, 0.035);
+  font: 400 clamp(180px, 25vw, 360px)/1 var(--display);
+  pointer-events: none;
+}
+.service-finder-intro {
+  align-self: start;
+  max-width: 350px;
+}
+.finder-label,
+.finder-result > span {
+  display: block;
+  color: var(--brand-brass-soft);
+  font: 9px var(--mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.service-finder-intro h3 {
+  margin: 20px 0 14px;
+  font: 500 clamp(27px, 3.2vw, 42px)/1.13 var(--display);
+  letter-spacing: -0.035em;
+}
+.service-finder-intro h3 em {
+  color: var(--brand-brass-soft);
+}
+.service-finder-intro p {
+  margin: 0;
+  color: rgba(245, 240, 229, 0.73);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.finder-options {
+  display: grid;
+  gap: 8px;
+}
+.finder-option {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 24px;
+  gap: 13px;
+  align-items: center;
+  padding: 13px 15px;
+  text-align: left;
+  color: var(--brand-ivory);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(245, 240, 229, 0.15);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-standard);
+}
+.finder-option:hover {
+  transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(227, 201, 156, 0.55);
+}
+.finder-option.is-selected {
+  background: rgba(209, 173, 114, 0.17);
+  border-color: var(--brand-brass);
+}
+.finder-option-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--brand-brass-soft);
+  background: rgba(209, 173, 114, 0.12);
+  border-radius: 50%;
+}
+.finder-option-copy {
+  display: grid;
+  gap: 4px;
+}
+.finder-option-copy strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.finder-option-copy small {
+  color: rgba(245, 240, 229, 0.62);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.finder-option-check {
+  color: var(--brand-brass-soft);
+  font-size: 19px;
+  text-align: center;
+}
+.finder-result {
+  grid-column: 2;
+  min-height: 56px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(245, 240, 229, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px 16px;
+}
+.finder-result > span {
+  color: rgba(245, 240, 229, 0.68);
+  letter-spacing: 0.09em;
+}
+.finder-result > strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.finder-result button {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 0;
+  padding: 11px 14px;
+  background: var(--brand-brass);
+  color: var(--brand-forest-deep);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: transform 0.2s var(--ease-standard), background 0.2s ease;
+}
+.finder-result button:hover {
+  transform: translateY(-2px);
+  background: var(--brand-brass-soft);
+}
+.journey-section {
+  background:
+    linear-gradient(135deg, rgba(118, 169, 160, 0.09), transparent 48%),
+    #f1eee6;
+}
+.journey-card {
+  border-radius: 3px 20px 3px 20px;
+  border-top: 2px solid var(--brand-brass);
+  box-shadow: 0 12px 35px rgba(16, 41, 35, 0.045);
+}
+.journey-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+}
+.manifesto {
+  background:
+    radial-gradient(ellipse at 80% 35%, rgba(118, 169, 160, 0.14), transparent 35%),
+    var(--brand-forest-deep);
+}
+.firm-section {
+  background: var(--paper);
+}
+.firm-portrait,
+.office-gallery figure {
+  overflow: hidden;
+  border-radius: 3px 24px 3px 24px;
+}
+.firm-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(227, 201, 156, 0.22);
+}
+.office-gallery img {
+  transition: transform 0.7s var(--ease-standard), filter 0.4s ease;
+}
+.office-gallery figure:hover img {
+  transform: scale(1.035);
+}
+.contact-section {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(118, 169, 160, 0.13), transparent 27%),
+    var(--brand-forest-deep);
+}
+.contact-form-card {
+  border-radius: 4px 26px 4px 26px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.16);
+}
+.enquiry-form input,
+.enquiry-form select,
+.enquiry-form textarea {
+  border-radius: 3px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.enquiry-form input:focus,
+.enquiry-form select:focus,
+.enquiry-form textarea:focus {
+  border-color: var(--brand-sea-glass);
+  box-shadow: 0 0 0 3px rgba(118, 169, 160, 0.15);
+}
+.floating-contact {
+  border-radius: 99px;
+  box-shadow: 0 12px 30px rgba(16, 41, 35, 0.22);
+}
+.floating-contact:hover {
+  transform: translateY(-3px);
+}
+.site-footer {
+  background: #0c211c;
+}
+
+:root[data-theme="dark"] {
+  --color-surface-soft: #1d302a;
+  --color-surface-tint: #203b34;
+}
+:root[data-theme="dark"] .trust-strip,
+:root[data-theme="dark"] .services-section,
+:root[data-theme="dark"] .journey-section {
+  background: #1b2924;
+}
+:root[data-theme="dark"] .approach-section,
+:root[data-theme="dark"] .firm-section {
+  background: #17231f;
+}
+:root[data-theme="dark"] .service-row {
+  border-color: rgba(227, 201, 156, 0.17);
+}
+:root[data-theme="dark"] .service-row:hover {
+  background: rgba(118, 169, 160, 0.08);
+}
+:root[data-theme="dark"] .service-icon {
+  background: rgba(118, 169, 160, 0.15);
+  color: var(--brand-sea-glass);
+}
+:root[data-theme="dark"] .service-tags span {
+  background: rgba(245, 240, 229, 0.055);
+  border-color: rgba(245, 240, 229, 0.13);
+}
+:root[data-theme="dark"] .journey-card {
+  background: #22332d;
+  border-color: rgba(209, 173, 114, 0.7);
+}
+:root[data-theme="dark"] .service-finder {
+  background: #102923;
+  border: 1px solid rgba(227, 201, 156, 0.2);
+}
+:root[data-theme="dark"] .office-gallery figcaption {
+  background: rgba(16, 41, 35, 0.92);
+}
+:root[data-theme="dark"] .approach-stamp {
+  background: #29483f;
+}
+
+@media (max-width: 900px) {
+  .service-finder {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .service-finder-intro {
+    max-width: 600px;
+  }
+  .finder-result {
+    grid-column: 1;
+  }
+}
+@media (max-width: 760px) {
+  .utility-bar {
+    padding: 0 5%;
+    font-size: 8px;
+  }
+  .service-finder {
+    margin: 34px 0;
+    padding: 24px 18px;
+    border-radius: 3px 20px 3px 20px;
+  }
+  .finder-option {
+    grid-template-columns: 34px minmax(0, 1fr) 20px;
+    gap: 10px;
+    padding: 12px 10px;
+  }
+  .finder-option-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .finder-option-copy strong {
+    font-size: 11px;
+  }
+  .finder-option-copy small {
+    font-size: 9px;
+  }
+  .finder-result {
+    align-items: flex-start;
+  }
+  .finder-result button {
+    margin: 5px 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-copy h1 {
+    letter-spacing: -0.035em;
+  }
+  .floating-contact {
+    bottom: 16px;
+    right: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-finder *,
+  .service-row,
+  .service-icon,
+  .office-gallery img,
+  .button-gold,
+  .desktop-nav a::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+.finder-result-actions {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px 16px;
+}
+.finder-result-actions button {
+  margin-left: 0;
+}
+.finder-result-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--brand-brass-soft);
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(227, 201, 156, 0.45);
+  text-underline-offset: 4px;
+}
+.finder-result-actions a:hover {
+  color: #fff;
+}
+@media (max-width: 760px) {
+  .finder-result-actions {
+    width: 100%;
+    margin: 5px 0 0;
+    display: grid;
+    justify-content: stretch;
+  }
+  .finder-result-actions a {
+    justify-content: center;
+    padding: 8px;
+  }
+}
+
+
+/* Block C — restore original light palette, rounded controls and improve cursor feedback */
+:root:not([data-theme="dark"]) {
+  --ink: #242723;
+  --deep: #1d2422;
+  --deep2: #2a312d;
+  --paper: #f2efe7;
+  --white: #faf8f2;
+  --gold: #c3a16b;
+  --gold2: #ddc79f;
+  --muted: #73776f;
+  --line: rgba(36, 39, 35, 0.17);
+  --color-text: #242723;
+  --color-text-muted: #73776f;
+  --color-surface: #f2efe7;
+  --color-surface-raised: #faf8f2;
+  --color-border: rgba(36, 39, 35, 0.17);
+}
+
+/* Keep the site's original rounded-pill action language consistent. */
+button,
+.button,
+a.button,
+.header-cta,
+.mobile-nav-cta,
+.floating-contact,
+.finder-result-actions a {
+  border-radius: 999px;
+}
+.finder-option {
+  border-radius: 16px;
+}
+.finder-whatsapp-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 21px;
+  background: #25d366;
+  color: #10251a !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.finder-whatsapp-cta:hover {
+  transform: translateY(-2px);
+  background: #49df80;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+.finder-form-link {
+  color: rgba(250, 248, 242, 0.82) !important;
+  text-decoration: none !important;
+}
+.finder-form-link span {
+  color: var(--brand-brass-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* A restrained cursor glow: ambient light, not a full-screen flashlight effect. */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 190px;
+  height: 190px;
+  margin: -95px 0 0 -95px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.2;
+  background: radial-gradient(circle, rgba(209, 173, 114, 0.23) 0%, rgba(118, 169, 160, 0.11) 32%, rgba(118, 169, 160, 0) 72%);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: opacity 0.25s ease;
+}
+.cursor-glow.cursor-active { opacity: 0.34; }
+:root[data-theme="dark"] .cursor-glow {
+  background: radial-gradient(circle, rgba(227, 201, 156, 0.28) 0%, rgba(118, 169, 160, 0.16) 34%, rgba(118, 169, 160, 0) 72%);
+  opacity: 0.26;
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-glow { display: none; }
+}
+@media (max-width: 760px) {
+  .finder-result-actions { align-items: stretch; }
+  .finder-whatsapp-cta { width: 100%; }
+}
+
+/* Scroll-triggered editorial heading reveal. The parent Reveal controls entry
+   into the viewport; this child animation adds a subtle text-focused finish. */
+.heading-reveal h2,
+.heading-reveal h3 {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(14px);
+  transition:
+    opacity 650ms ease,
+    transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 850ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.heading-reveal.is-visible h2,
+.heading-reveal.is-visible h3 {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .heading-reveal h2,
+  .heading-reveal h3 {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Theme restoration: Adoyo's original light and dark colour systems.
+   Keep the original palette; do not let the conversion-uplift accents
+   replace the firm's established forest, ivory and brass identity. */
+:root {
+  --ink: #242723;
+  --deep: #1d2422;
+  --deep2: #2a312d;
+  --paper: #f2efe7;
+  --white: #faf8f2;
+  --gold: #c3a16b;
+  --gold2: #ddc79f;
+  --muted: #73776f;
+  --line: rgba(36, 39, 35, 0.17);
+
+  --brand-forest: #1d2422;
+  --brand-forest-deep: #1d2422;
+  --brand-brass: #c3a16b;
+  --brand-brass-soft: #ddc79f;
+  --brand-ivory: #faf8f2;
+  --brand-sea-glass: #c3a16b;
+  --brand-terracotta: #c3a16b;
+
+  --color-text: #242723;
+  --color-text-muted: #73776f;
+  --color-surface: #f2efe7;
+  --color-surface-raised: #faf8f2;
+  --color-border: rgba(36, 39, 35, 0.17);
+  --color-focus: #c3a16b;
+}
+
+/* Original dark palette, applied consistently to both semantic and legacy tokens. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e8e8df;
+  --deep: #111715;
+  --deep2: #1b2420;
+  --paper: #171d1a;
+  --white: #f4f0e5;
+  --gold: #c3a16b;
+  --gold2: #e0c99f;
+  --muted: #a1a79d;
+  --line: rgba(232, 232, 223, 0.17);
+
+  --brand-forest: #111715;
+  --brand-forest-deep: #111715;
+  --brand-brass: #c3a16b;
+  --brand-brass-soft: #e0c99f;
+  --brand-ivory: #f4f0e5;
+  --brand-sea-glass: #c3a16b;
+  --brand-terracotta: #c3a16b;
+
+  --color-text: #e8e8df;
+  --color-text-muted: #a1a79d;
+  --color-surface: #171d1a;
+  --color-surface-raised: #1b2420;
+  --color-border: rgba(232, 232, 223, 0.17);
+  --color-focus: #e0c99f;
+}
+
+/* The contact section must remain light in light mode and dark in dark mode.
+   A previous unconditional uplift rule forced a dark background in both themes. */
+:root:not([data-theme="dark"]) .contact-section {
+  background: #e4e0d5;
+  color: #242723;
+}
+:root:not([data-theme="dark"]) .contact-left h2 {
+  color: #242723;
+}
+:root:not([data-theme="dark"]) .contact-left h2 em {
+  color: #a17b40;
+}
+:root:not([data-theme="dark"]) .contact-lede {
+  color: #505950;
+}
+:root:not([data-theme="dark"]) .contact-links small,
+:root:not([data-theme="dark"]) .contact-location small {
+  color: #60695f;
+}
+
+:root[data-theme="dark"] .contact-section {
+  background: #171d1a;
+  color: #e8e8df;
+}
+:root[data-theme="dark"] .contact-left h2 {
+  color: #e8e8df;
+}
+:root[data-theme="dark"] .contact-left h2 em {
+  color: #e0c99f;
+}
+:root[data-theme="dark"] .contact-lede,
+:root[data-theme="dark"] .contact-privacy {
+  color: #a1a79d;
+}
+:root[data-theme="dark"] .contact-links small,
+:root[data-theme="dark"] .contact-location small {
+  color: #a1a79d;
+}
+:root[data-theme="dark"] .contact-links > a,
+:root[data-theme="dark"] .contact-location {
+  border-color: rgba(232, 232, 223, 0.17);
+}
+:root[data-theme="dark"] .contact-form-card {
+  background: #1b2420;
+  color: #e8e8df;
+  border: 1px solid rgba(232, 232, 223, 0.17);
+}
+:root[data-theme="dark"] .contact-form-card h3 {
+  color: #f4f0e5;
+}
+:root[data-theme="dark"] .contact-form-card > p,
+:root[data-theme="dark"] .form-card-head,
+:root[data-theme="dark"] .form-card-bottom,
+:root[data-theme="dark"] .enquiry-form label {
+  color: #c5c9bf;
+}
+:root[data-theme="dark"] .enquiry-form input,
+:root[data-theme="dark"] .enquiry-form select,
+:root[data-theme="dark"] .enquiry-form textarea {
+  background: #171d1a;
+  color: #f4f0e5;
+  border-color: rgba(232, 232, 223, 0.2);
+}
+:root[data-theme="dark"] .enquiry-form input::placeholder,
+:root[data-theme="dark"] .enquiry-form textarea::placeholder {
+  color: #a1a79d;
+}
+
