@@ -22,6 +22,7 @@ import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
 import ServiceFinder from "@/components/ServiceFinder";
 import ServiceEnquiryLink from "@/components/ServiceEnquiryLink";
+import FirstVisitWelcome from "@/components/FirstVisitWelcome";
 
 const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
   "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
@@ -95,6 +96,7 @@ export default function Home() {
   };
   return (
     <main id="home">
+      <FirstVisitWelcome />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(legalBusinessSchema).replace(/</g, "\\u003c") }} />
       <SmoothScroll />
       <div className="utility-bar">
