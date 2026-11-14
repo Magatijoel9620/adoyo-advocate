@@ -273,7 +273,7 @@ export default function Home() {
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <Reveal key={s.n} className="service-row">
+              <Reveal key={s.n} id={`service-${s.n}`} className="service-row">
                 <div className="service-count">{s.n}</div>
                 <div className="service-icon">
                   <Icon size={24} strokeWidth={1.3} />
