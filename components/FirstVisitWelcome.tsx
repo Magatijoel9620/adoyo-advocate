@@ -29,8 +29,22 @@ export default function FirstVisitWelcome() {
   const [selectedId, setSelectedId] = useState<ServiceId | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const selectionResultRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const selected = services.find((service) => service.id === selectedId) ?? null;
+
+  useEffect(() => {
+    if (!selectedId || !selectionResultRef.current) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Keep the contextual next step visible after a card is selected,
+    // including on short mobile viewports.
+    requestAnimationFrame(() => {
+      selectionResultRef.current?.scrollIntoView({
+        block: "nearest",
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    });
+  }, [selectedId]);
 
   useEffect(() => {
     try {
@@ -120,19 +134,19 @@ export default function FirstVisitWelcome() {
               })}
             </div>
 
-            <div className="welcome-selection-result" aria-live="polite" aria-atomic="true">
+            <div ref={selectionResultRef} className="welcome-selection-result" aria-live="polite" aria-atomic="true">
               {selected ? <>
                 <div><span className="welcome-result-label">YOUR SELECTED AREA</span><strong>{selected.title}</strong></div>
                 <a className="welcome-result-cta" href={selected.destination} onClick={dismiss}>{selected.action} <ArrowUpRight size={16} /></a>
               </> : <span>Select a service to see the most relevant next step.</span>}
             </div>
 
-            <footer className="welcome-guided-footer">
-              <span>Not ready to choose?</span>
-              <button type="button" onClick={dismiss}>Continue to website <ArrowUpRight size={15} /></button>
-            </footer>
             <p className="welcome-guided-note">This selector helps you navigate the firm’s services; it does not provide legal advice.</p>
           </div>
+          <footer className="welcome-guided-footer">
+            <span>Not ready to choose?</span>
+            <button type="button" onClick={dismiss}>Continue to website <ArrowUpRight size={15} /></button>
+          </footer>
         </div>
       </div>
     </div>

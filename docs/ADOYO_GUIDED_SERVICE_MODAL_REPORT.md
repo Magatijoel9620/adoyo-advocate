@@ -44,3 +44,24 @@ The first four destinations are stable IDs added to the corresponding existing s
 ## Verification status
 
 Source-level route mapping and preservation checks were completed against the supplied project archive. A dependency install was attempted, but `npm ci` did not complete within the available execution window. Consequently, a production build, automated browser tests and live viewport/accessibility tests are **not confirmed**. Run `npm ci` and `npm run build`, then manually verify 320px, 360px, 390px, tablet, desktop, portrait and landscape layouts before merging.
+
+
+## Follow-up responsive scrolling correction
+
+- The dialog now receives a definite viewport-relative height so its flex content has a real available scroll region on desktop and mobile.
+- The content panel is the dedicated vertical scroll container (`min-height: 0`, `overflow-y: auto`, momentum scrolling on touch devices).
+- Selecting a service now scrolls the contextual next-step panel into view, respecting reduced-motion preferences.
+- Mobile portrait and short landscape layouts retain the same scrollable content region; the header and close control remain visible.
+- This patch addresses the previously reported hidden follow-up action and non-scrolling desktop dialog.
+
+
+## 375 × 667 mobile layout correction
+
+The prior `.welcome-content-scroll` had `overflow-y: auto`, but its parent `.welcome-content` was not a flex container. As a result, the scroll child did not receive a bounded height and the browser had no constrained scroll viewport.
+
+Correction:
+- `.welcome-content` is now a column flex container with `min-height: 0`.
+- `.welcome-content-scroll` is a bounded flex child (`flex: 1 1 0; height: 0; min-height: 0`) and owns vertical scrolling.
+- The "Continue to website" footer is now outside the scroll viewport in a persistent bottom action row, so it stays visible at 375 × 667 and smaller screens.
+- The selected-service follow-up remains inside the scroll viewport and is brought into view after selection.
+- Mobile safe-area padding and dark-theme footer styling are included.
