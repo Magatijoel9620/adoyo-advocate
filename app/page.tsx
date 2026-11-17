@@ -29,7 +29,6 @@ const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent
 
 const services = [
   {
-    n: "01",
     slug: "criminal-law-defence",
     title: "Criminal law & defence",
     short: "A clear, prepared response when the stakes are high.",
@@ -39,7 +38,6 @@ const services = [
     tags: ["Bail & bond", "Court representation", "Criminal defence"],
   },
   {
-    n: "02",
     slug: "conveyancing-property",
     title: "Conveyancing & property",
     short: "Careful legal work for decisions that carry lasting value.",
@@ -49,7 +47,6 @@ const services = [
     tags: ["Property transfers", "Title review", "Due diligence"],
   },
   {
-    n: "03",
     slug: "employment-labour",
     title: "Employment & labour",
     short: "Helping people and organisations navigate workplace disputes.",
@@ -59,7 +56,6 @@ const services = [
     tags: ["Employment disputes", "Contracts", "Termination matters"],
   },
   {
-    n: "04",
     slug: "road-traffic-claims",
     title: "Road traffic claims",
     short: "Guidance through the legal steps after a road accident.",
@@ -276,8 +272,7 @@ export default function Home() {
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <Reveal key={s.n} id={`service-${s.n}`} className="service-row">
-                <div className="service-count">{s.n}</div>
+              <Reveal key={s.slug} id={`service-${s.slug}`} className="service-row">
                 <div className="service-icon">
                   <Icon size={24} strokeWidth={1.3} />
                 </div>
@@ -292,7 +287,7 @@ export default function Home() {
                 </a>
                 <div className="service-detail">
                   <p>{s.detail}</p>
-                  <a className="service-details-cta" href={`/services/${s.slug}`} aria-label={`View ${s.title} service details`}>View service details <ArrowUpRight size={15} /></a>
+                  <a className="service-details-cta" href={`/services/${s.slug}`} aria-label={`View ${s.title} service details`}> <ArrowUpRight size={15} /></a>
                 </div>
               </Reveal>
             );
@@ -328,8 +323,7 @@ export default function Home() {
         </div>
         <div className="journey-grid">
           <Reveal className="journey-card">
-            <span className="journey-number">01</span>
-            <div className="journey-icon">
+<div className="journey-icon">
               <MessageCircle size={21} />
             </div>
             <h3>Start with a conversation</h3>
@@ -340,8 +334,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal className="journey-card" delay={0.08}>
-            <span className="journey-number">02</span>
-            <div className="journey-icon">
+<div className="journey-icon">
               <Scale size={21} />
             </div>
             <h3>Understand the position</h3>
@@ -352,8 +345,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal className="journey-card" delay={0.16}>
-            <span className="journey-number">03</span>
-            <div className="journey-icon">
+<div className="journey-icon">
               <Check size={21} />
             </div>
             <h3>Agree on a way forward</h3>

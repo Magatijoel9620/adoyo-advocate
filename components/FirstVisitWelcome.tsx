@@ -15,11 +15,11 @@ import {
 const DISMISS_KEY = "adoyo-first-visit-welcome-dismissed";
 
 const services = [
-  { id: "criminal", number: "01", title: "Criminal law & defence", description: "Investigations, bail and bond, defence and court representation.", destination: "#service-01", action: "Explore criminal law & defence", Icon: ShieldCheck },
-  { id: "property", number: "02", title: "Conveyancing & property", description: "Property transactions, title review, due diligence and conveyancing.", destination: "#service-02", action: "Explore conveyancing & property", Icon: Landmark },
-  { id: "employment", number: "03", title: "Employment & labour", description: "Employment relationships, workplace rights, contracts and disputes.", destination: "#service-03", action: "Explore employment & labour", Icon: BriefcaseBusiness },
-  { id: "road-traffic", number: "04", title: "Road traffic claims", description: "Accident-related claims, liability and compensation enquiries.", destination: "#service-04", action: "Explore road traffic claims", Icon: CarFront },
-  { id: "general", number: "05", title: "Another legal enquiry", description: "Not sure which area applies? Start with a general enquiry.", destination: "#contact", action: "Continue to general enquiry", Icon: CircleHelp },
+  { id: "criminal", title: "Criminal law & defence", description: "Investigations, bail and bond, defence and court representation.", destination: "/services/criminal-law-defence", action: "Explore criminal law & defence", Icon: ShieldCheck },
+  { id: "property", title: "Conveyancing & property", description: "Property transactions, title review, due diligence and conveyancing.", destination: "/services/conveyancing-property", action: "Explore conveyancing & property", Icon: Landmark },
+  { id: "employment", title: "Employment & labour", description: "Employment relationships, workplace rights, contracts and disputes.", destination: "/services/employment-labour", action: "Explore employment & labour", Icon: BriefcaseBusiness },
+  { id: "road-traffic", title: "Road traffic claims", description: "Accident-related claims, liability and compensation enquiries.", destination: "/services/road-traffic-claims", action: "Explore road traffic claims", Icon: CarFront },
+  { id: "general", title: "Another legal enquiry", description: "Not sure which area applies? Start with a general enquiry.", destination: "#contact", action: "Continue to general enquiry", Icon: CircleHelp },
 ] as const;
 
 type ServiceId = (typeof services)[number]["id"];
@@ -121,11 +121,11 @@ export default function FirstVisitWelcome() {
             <p id="welcome-description" className="welcome-intro">Choose the area closest to what you need help with. You can explore the relevant service or make a general enquiry if you are unsure.</p>
 
             <div className="welcome-service-grid" role="group" aria-label="Select a legal service">
-              {services.map(({ id, number, title, description, Icon }) => {
+              {services.map(({ id, title, description, Icon }) => {
                 const active = selectedId === id;
                 return (
                   <button key={id} type="button" className={`welcome-service-card${active ? " is-selected" : ""}`} aria-pressed={active} onClick={() => setSelectedId(id)}>
-                    <span className="welcome-service-card-top"><span className="welcome-service-icon"><Icon size={19} strokeWidth={1.7} /></span><span className="welcome-service-number">{number}</span></span>
+                    <span className="welcome-service-card-top"><span className="welcome-service-icon"><Icon size={19} strokeWidth={1.7} /></span></span>
                     <strong>{title}</strong>
                     <small>{description}</small>
                     <span className="welcome-service-select" aria-hidden="true">{active ? "Selected ✓" : "Select area"}</span>

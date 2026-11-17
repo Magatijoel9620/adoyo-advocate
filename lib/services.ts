@@ -1,7 +1,6 @@
 export const legalServices = [
   {
     slug: "criminal-law-defence",
-    number: "01",
     title: "Criminal law & defence",
     shortTitle: "Criminal law and defence",
     summary: "A clear, prepared response when the stakes are high.",
@@ -15,7 +14,6 @@ export const legalServices = [
   },
   {
     slug: "conveyancing-property",
-    number: "02",
     title: "Conveyancing & property",
     shortTitle: "Conveyancing and property",
     summary: "Careful legal work for decisions that carry lasting value.",
@@ -29,7 +27,6 @@ export const legalServices = [
   },
   {
     slug: "employment-labour",
-    number: "03",
     title: "Employment & labour",
     shortTitle: "Employment and labour",
     summary: "Helping people and organisations navigate workplace disputes.",
@@ -43,7 +40,6 @@ export const legalServices = [
   },
   {
     slug: "road-traffic-claims",
-    number: "04",
     title: "Road traffic accident claims",
     shortTitle: "Road traffic accident claims",
     summary: "Guidance through the legal steps after a road accident.",

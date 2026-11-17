@@ -14,10 +14,12 @@ const SERVICES = [
 
 type SubmissionStatus = "idle" | "sending" | "success" | "error";
 
-export default function EnquiryForm() {
+type EnquiryFormProps = { initialService?: string };
+
+export default function EnquiryForm({ initialService = "" }: EnquiryFormProps) {
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [error, setError] = useState("");
-  const [selectedService, setSelectedService] = useState("");
+  const [selectedService, setSelectedService] = useState(initialService);
 
   useEffect(() => {
     function handleServiceSelection(event: Event) {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, Mail, MessageCircle, Phone } from "lucide-react";
+import ServiceEnquiryModal from "@/components/ServiceEnquiryModal";
 import SiteHeader from "@/components/SiteHeader";
 import { getLegalService, legalServices } from "@/lib/services";
 
@@ -51,13 +52,13 @@ export default async function LegalServicePage({ params }: Props) {
       <section className="service-detail-hero">
         <div className="service-detail-inner">
           <Link href="/#services" className="service-back-link"><ArrowLeft size={15} /> All practice areas</Link>
-          <p className="eyebrow"><span className="eyebrow-mark" /> PRACTICE AREA — {service.number} / KENYA</p>
+          <p className="eyebrow"><span className="eyebrow-mark" /> PRACTICE AREA</p>
           <h1>{service.title.split(" & ").length > 1 ? <>{service.title.split(" & ")[0]} <em>&amp; {service.title.split(" & ")[1]}</em></> : service.title}</h1>
           <p className="service-detail-lede">{service.summary}</p>
           <p className="service-detail-description">{service.description}</p>
           <div className="service-detail-actions">
             <a className="button button-gold" href={whatsapp} target="_blank" rel="noopener noreferrer">Enquire on WhatsApp <ArrowUpRight size={17} /></a>
-            <a className="button button-outline" href="/#contact">Use the enquiry form <ArrowUpRight size={16} /></a>
+            <ServiceEnquiryModal service={service.enquiryService} />
           </div>
           <div className="service-detail-contact-row">
             <a href="tel:+254701403467"><Phone size={16} /> +254 701 403 467</a>

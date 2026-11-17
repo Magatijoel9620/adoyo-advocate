@@ -588,7 +588,7 @@ textarea:focus-visible {
 }
 .service-row {
   display: grid;
-  grid-template-columns: 45px 54px 1.05fr 0.95fr;
+  grid-template-columns: 54px 1.05fr 0.95fr;
   gap: 22px;
   align-items: center;
   padding: 27px 0;
@@ -599,12 +599,6 @@ textarea:focus-visible {
   padding-left: 10px;
   padding-right: 10px;
   background: rgba(250, 248, 242, 0.43);
-}
-.service-count {
-  align-self: start;
-  padding-top: 5px;
-  font: 9px var(--mono);
-  color: #8d8d80;
 }
 .service-icon {
   width: 48px;
@@ -716,15 +710,18 @@ textarea:focus-visible {
 }
 .button-outline {
   margin-top: 17px;
-  border: 1px solid rgba(221, 199, 159, 0.55);
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--gold2);
   color: var(--white);
+  cursor: pointer;
 }
 .button-outline svg {
   color: var(--gold2);
 }
 .button-outline:hover {
   background: var(--gold);
-  color: var(--ink);
+  color: var(--deep);
 }
 .manifesto-watermark {
   position: absolute;
@@ -1411,7 +1408,7 @@ textarea:focus-visible {
     max-width: 430px;
   }
   .service-row {
-    grid-template-columns: 27px 42px 1fr 32px;
+    grid-template-columns: 42px minmax(0, 1fr) 32px;
     gap: 11px;
     padding: 22px 0;
     align-items: start;
@@ -1450,11 +1447,8 @@ textarea:focus-visible {
   .service-detail a {
     width: 31px;
     height: 31px;
-    grid-column: 4;
+    grid-column: 3;
     grid-row: 1;
-  }
-  .service-count {
-    font-size: 8px;
   }
   .manifesto {
     padding: 75px 7%;
@@ -1566,7 +1560,7 @@ textarea:focus-visible {
     font-size: 11px;
   }
   .service-row {
-    grid-template-columns: 20px 36px 1fr 28px;
+    grid-template-columns: 36px minmax(0, 1fr) 28px;
     gap: 8px;
   }
   .service-icon {
@@ -2054,7 +2048,7 @@ body {
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.09);
 }
 .button-outline {
-  border: 1px solid rgba(221, 199, 159, 0.6);
+  border-color: var(--gold2);
   border-radius: 999px;
 }
 .button-gold {
@@ -2172,7 +2166,7 @@ body {
 .service-row {
   border-radius: 18px;
   padding: 28px 18px;
-  grid-template-columns: 38px 58px 1.05fr 0.95fr;
+  grid-template-columns: 58px 1.05fr 0.95fr;
   gap: 20px;
   transition:
     padding 0.28s,
@@ -2787,7 +2781,7 @@ body {
     gap: 15px;
   }
   .service-row {
-    grid-template-columns: 30px 48px 1fr;
+    grid-template-columns: 48px minmax(0, 1fr) 38px;
     gap: 13px;
     padding: 23px 9px;
     border-radius: 16px;
@@ -2801,7 +2795,7 @@ body {
     font-size: 23px;
   }
   .service-detail {
-    grid-column: 3;
+    grid-column: 2;
     align-items: flex-start;
     margin-top: 3px;
   }
@@ -4079,108 +4073,132 @@ a.button,
 .service-title-link { color: inherit; text-decoration: none; }
 .service-title-link:hover { color: var(--gold); }
 
-
-/* Block C — trust and service discovery refinements */
-.service-main-link {
-  display: block;
-  min-width: 0;
-  color: inherit;
-  text-decoration: none;
-  border-radius: 2px;
-}
-.service-main-link h3 { transition: color .2s ease; }
-.service-main-link:hover h3,
-.service-main-link:focus-visible h3 { color: #987341; }
-.service-main-link:focus-visible,
-.service-details-cta:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 5px;
-}
-.service-details-cta {
-  width: auto !important;
-  min-width: 154px;
-  height: auto !important;
-  min-height: 42px;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 13px;
-  border: 1px solid rgba(161, 123, 64, .5);
-  font-size: 10px;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-.firm-trust-facts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 58px 0 68px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.firm-trust-facts > div {
-  padding: 24px 26px 25px 0;
-}
-.firm-trust-facts > div + div {
-  border-left: 1px solid var(--line);
-  padding-left: 26px;
-}
-.firm-trust-facts span {
-  display: block;
-  color: #987341;
-  font: 8px var(--mono);
-  letter-spacing: .12em;
-  margin-bottom: 13px;
-}
-.firm-trust-facts strong {
-  display: block;
-  font: 23px var(--display);
-  font-weight: 400;
-  color: var(--ink);
-}
-.firm-trust-facts p {
-  max-width: 290px;
-  margin: 9px 0 0;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.8;
-}
+/* Service discovery and service-page mobile refinements */
+.finder-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.finder-option { display: grid; grid-template-columns: 38px minmax(0, 1fr) 22px; align-items: center; gap: 13px; min-width: 0; color: inherit; text-decoration: none; }
+.finder-option-check { display: grid; place-items: center; color: var(--gold); }
+.finder-general-enquiry { margin: 18px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.finder-general-enquiry a { display: inline-flex; align-items: center; gap: 5px; margin-left: 4px; color: var(--gold); text-underline-offset: 4px; }
+.finder-option:focus-visible, .service-back-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.service-back-link { position: relative; z-index: 2; }
+.service-detail-hero { scroll-margin-top: 110px; }
+.service-detail-content { padding-left: clamp(22px, 5vw, 64px); padding-right: clamp(22px, 5vw, 64px); }
 @media (max-width: 760px) {
-  .service-row {
-    grid-template-columns: 24px 42px minmax(0, 1fr);
-    gap: 10px;
-    align-items: start;
+  .finder-options { grid-template-columns: 1fr; }
+  .finder-option { min-height: 68px; padding: 12px 10px; }
+  .finder-option-copy strong { font-size: 13px; line-height: 1.4; }
+  .finder-option-copy small { font-size: 11px; line-height: 1.5; }
+  .finder-general-enquiry { font-size: 11px; }
+  .finder-general-enquiry a { margin: 5px 0 0; }
+  .service-detail-hero { padding: 126px 20px 52px; }
+  .service-back-link { margin: 0 0 34px; padding: 8px 0; }
+  .service-detail-hero h1 { font-size: clamp(39px, 11vw, 58px); overflow-wrap: anywhere; }
+  .service-detail-lede { font-size: clamp(20px, 6vw, 26px); }
+  .service-detail-description { font-size: 14px; line-height: 1.75; }
+  .service-detail-actions { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .service-detail-actions .button { width: 100%; justify-content: center; }
+  .service-detail-contact-row { display: grid; gap: 13px; }
+  .service-detail-contact-row a { overflow-wrap: anywhere; }
+  .service-detail-content { padding-left: 20px; padding-right: 20px; }
+  .service-detail-content-grid { grid-template-columns: minmax(0, 1fr); }
+  .service-detail-list > div { align-items: flex-start; line-height: 1.6; }
+  .service-faq summary { font-size: 18px; line-height: 1.45; }
+  .service-detail-bottom-cta { padding: 24px 20px; }
+  .service-detail-bottom-cta .button { width: 100%; justify-content: center; }
+  .service-detail-footer { display: grid; gap: 12px; padding: 22px 20px; }
+}
+@media (max-width: 380px) {
+  .service-detail-hero { padding-left: 16px; padding-right: 16px; }
+  .service-detail-hero h1 { font-size: 38px; }
+  .service-detail-content { padding-left: 16px; padding-right: 16px; }
+}
+
+
+/* Service-page enquiry modal */
+.enquiry-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(8, 13, 11, .78);
+  backdrop-filter: blur(7px);
+}
+.enquiry-modal {
+  width: min(100%, 720px);
+  max-height: min(calc(100vh - 32px), 900px);
+  max-height: min(calc(100dvh - 32px), 900px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: clamp(22px, 4vw, 42px);
+  background: var(--deep);
+  color: var(--white);
+  border: 1px solid rgba(195,161,107,.38);
+  box-shadow: 0 24px 90px rgba(0,0,0,.35);
+}
+.enquiry-modal .enquiry-form {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.enquiry-modal-backdrop,
+.enquiry-modal .enquiry-form {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.enquiry-modal-backdrop::-webkit-scrollbar,
+.enquiry-modal .enquiry-form::-webkit-scrollbar { display: none; }
+.enquiry-modal-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 26px;
+  flex: 0 0 auto;
+}
+.enquiry-modal-heading h2 {
+  margin: 10px 0;
+  font: 400 clamp(30px, 5vw, 46px)/1.1 var(--display);
+}
+.enquiry-modal-heading h2 em { color: var(--gold); }
+.enquiry-modal-heading p {
+  max-width: 540px;
+  margin: 0;
+  color: rgba(250,248,242,.72);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.enquiry-modal-close {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(250,248,242,.25);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+}
+.enquiry-modal .form-row { grid-template-columns: 1fr 1fr; }
+@media (max-width: 600px) {
+  .enquiry-modal-backdrop {
+    padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
+      max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
   }
-  .service-main-link {
-    grid-column: 3;
-    grid-row: 1;
-    padding: 2px 0 8px;
-    min-height: 100%;
-    cursor: pointer;
+  .enquiry-modal {
+    width: 100%;
+    max-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)));
+    padding: 22px 18px calc(22px + env(safe-area-inset-bottom));
   }
-  .service-detail {
-    display: block;
-    grid-column: 3;
-    grid-row: 2;
-    margin-top: 4px;
-  }
-  .service-detail p { display: none; }
-  .service-detail .service-details-cta {
-    display: inline-flex !important;
-    width: auto !important;
-    min-width: 0;
-    min-height: 38px;
-    padding: 8px 11px;
-  }
-  .firm-trust-facts {
-    grid-template-columns: 1fr;
-    margin: 40px 0 48px;
-  }
-  .firm-trust-facts > div,
-  .firm-trust-facts > div + div {
-    padding: 19px 0;
-    border-left: 0;
-  }
-  .firm-trust-facts > div + div { border-top: 1px solid var(--line); }
-  .firm-trust-facts strong { font-size: 21px; }
+  .enquiry-modal-heading { gap: 12px; margin-bottom: 18px; }
+  .enquiry-modal-heading h2 { font-size: clamp(28px, 8vw, 36px); }
+  .enquiry-modal-close { flex-basis: 40px; width: 40px; height: 40px; }
+  .enquiry-modal .form-row { grid-template-columns: 1fr; }
+  .enquiry-modal .form-submit { width: 100%; justify-content: center; }
 }
