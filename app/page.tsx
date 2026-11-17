@@ -21,7 +21,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
 import ServiceFinder from "@/components/ServiceFinder";
-import ServiceEnquiryLink from "@/components/ServiceEnquiryLink";
+import FirstVisitWelcome from "@/components/FirstVisitWelcome";
 
 const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
   "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
@@ -30,6 +30,7 @@ const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent
 const services = [
   {
     n: "01",
+    slug: "criminal-law-defence",
     title: "Criminal law & defence",
     short: "A clear, prepared response when the stakes are high.",
     detail:
@@ -39,6 +40,7 @@ const services = [
   },
   {
     n: "02",
+    slug: "conveyancing-property",
     title: "Conveyancing & property",
     short: "Careful legal work for decisions that carry lasting value.",
     detail:
@@ -48,6 +50,7 @@ const services = [
   },
   {
     n: "03",
+    slug: "employment-labour",
     title: "Employment & labour",
     short: "Helping people and organisations navigate workplace disputes.",
     detail:
@@ -57,6 +60,7 @@ const services = [
   },
   {
     n: "04",
+    slug: "road-traffic-claims",
     title: "Road traffic claims",
     short: "Guidance through the legal steps after a road accident.",
     detail:
@@ -95,6 +99,7 @@ export default function Home() {
   };
   return (
     <main id="home">
+      <FirstVisitWelcome />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(legalBusinessSchema).replace(/</g, "\\u003c") }} />
       <SmoothScroll />
       <div className="utility-bar">
@@ -271,12 +276,12 @@ export default function Home() {
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <Reveal key={s.n} className="service-row">
+              <Reveal key={s.n} id={`service-${s.n}`} className="service-row">
                 <div className="service-count">{s.n}</div>
                 <div className="service-icon">
                   <Icon size={24} strokeWidth={1.3} />
                 </div>
-                <div className="service-main">
+                <a className="service-main service-main-link" href={`/services/${s.slug}`} aria-label={`View ${s.title} service details`}>
                   <h3>{s.title}</h3>
                   <p>{s.short}</p>
                   <div className="service-tags">
@@ -284,10 +289,10 @@ export default function Home() {
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
-                </div>
+                </a>
                 <div className="service-detail">
                   <p>{s.detail}</p>
-                  <ServiceEnquiryLink service={s.n === "04" ? "Road traffic accident claims" : s.title} label={`Enquire about ${s.title}`} />
+                  <a className="service-details-cta" href={`/services/${s.slug}`} aria-label={`View ${s.title} service details`}>View service details <ArrowUpRight size={15} /></a>
                 </div>
               </Reveal>
             );
@@ -450,6 +455,11 @@ export default function Home() {
               ADVOCATE BIOGRAPHY & PROFESSIONAL DETAILS TO BE CONFIRMED
             </div> */}
           </Reveal>
+        </div>
+        <div className="firm-trust-facts" aria-label="About the practice">
+          <div><span>01 / BASED IN</span><strong>Malindi, Kenya</strong><p>A local practice with an office at Sea Breeze Plaza.</p></div>
+          <div><span>02 / LEGAL SCOPE</span><strong>Kenyan law</strong><p>Enquiries are welcome for matters connected to Kenyan law.</p></div>
+          <div><span>03 / CLIENT APPROACH</span><strong>Clear communication</strong><p>Understand the circumstances, explain available options and prepare carefully.</p></div>
         </div>
         <div className="office-gallery" aria-label="Inside the firm's office">
           <figure className="office-gallery-main">
@@ -618,7 +628,7 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
             <span>CONTACT</span>
             <a href="tel:+254701403467">+254 701 403 467</a>
             <a href="mailto:info@adoyolaw.com">info@adoyolaw.com</a>
-            <a href="mailto:info@adoyolaw.com">adoyoadvocate@gmail.com</a>
+            <a href="mailto:adoyoadvocate@gmail.com">adoyoadvocate@gmail.com</a>
             <a
               href="https://wa.me/254701403467"
               target="_blank"

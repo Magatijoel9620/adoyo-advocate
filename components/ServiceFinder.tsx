@@ -16,6 +16,7 @@ const options = [
     title: "A criminal investigation or court matter",
     detail: "Bail, bond, defence or court representation",
     service: "Criminal law & defence",
+    href: "/services/criminal-law-defence",
     icon: ShieldCheck,
   },
   {
@@ -23,6 +24,7 @@ const options = [
     title: "A property or land transaction",
     detail: "Buying, selling, title checks or conveyancing",
     service: "Conveyancing & property",
+    href: "/services/conveyancing-property",
     icon: Landmark,
   },
   {
@@ -30,6 +32,7 @@ const options = [
     title: "A workplace or employment issue",
     detail: "Employment contracts, disputes or termination",
     service: "Employment & labour",
+    href: "/services/employment-labour",
     icon: BriefcaseBusiness,
   },
   {
@@ -37,6 +40,7 @@ const options = [
     title: "A road accident or injury claim",
     detail: "A claim, liability or compensation enquiry",
     service: "Road traffic accident claims",
+    href: "/services/road-traffic-claims",
     icon: CarFront,
   },
   {
@@ -44,6 +48,7 @@ const options = [
     title: "Something else / I'm not sure",
     detail: "Start with a general enquiry and the firm can review it",
     service: "General legal enquiry",
+    href: "/#contact",
     icon: CircleHelp,
   },
 ] as const;
@@ -91,17 +96,8 @@ export default function ServiceFinder() {
             <span>YOUR SELECTED AREA</span>
             <strong>{selected.service}</strong>
             <div className="finder-result-actions">
-              <a
-                className="finder-whatsapp-cta"
-                href={`https://wa.me/254701403467?text=${encodeURIComponent(`Hello, I would like to make an enquiry about ${selected.service}. Could you please guide me on the next step?`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Start a WhatsApp enquiry about ${selected.service}`}
-              >
-                Continue on WhatsApp <ArrowUpRight size={16} />
-              </a>
-              <a className="finder-form-link" href="#contact">
-                Prefer the enquiry form? <span>Go to contact</span>
+              <a className="finder-whatsapp-cta" href={selected.href}>
+                {selected.id === "unsure" ? "Start a general enquiry" : "View service details"} <ArrowUpRight size={16} />
               </a>
             </div>
           </>
