@@ -73,7 +73,12 @@ export default function ServiceFinder() {
               type="button"
               key={option.id}
               aria-pressed={active}
-              onClick={() => setSelected(option)}
+              onClick={() => {
+                setSelected(option);
+                window.dispatchEvent(new CustomEvent("adoyo:service-finder", {
+                  detail: { serviceId: option.id },
+                }));
+              }}
             >
               <span className="finder-option-icon"><Icon size={19} /></span>
               <span className="finder-option-copy">

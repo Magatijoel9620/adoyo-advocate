@@ -1146,10 +1146,6 @@ textarea:focus-visible {
   margin: 15px 0 0;
 }
 .floating-contact {
-  position: fixed;
-  right: 22px;
-  bottom: 22px;
-  z-index: 40;
   display: flex;
   align-items: center;
   gap: 9px;
@@ -1169,6 +1165,31 @@ textarea:focus-visible {
 }
 .floating-contact > svg:last-child {
   margin-left: 4px;
+}
+.floating-actions {
+  position: fixed;
+  right: max(25px, env(safe-area-inset-right));
+  bottom: max(25px, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.floating-back-to-top {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 12px 30px rgba(16, 41, 35, 0.22);
+  transition: transform 0.2s, background 0.2s;
+}
+.floating-back-to-top:hover {
+  transform: translateY(-3px);
+  background: var(--gold2);
 }
 @media (min-width: 1500px) {
   .hero {
@@ -1516,9 +1537,11 @@ textarea:focus-visible {
     gap: 12px;
     font-size: 7px;
   }
+  .floating-actions {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
   .floating-contact {
-    right: 12px;
-    bottom: 12px;
     padding: 12px;
   }
   .floating-contact span {
@@ -2376,8 +2399,6 @@ body {
 .floating-contact {
   border-radius: 999px;
   padding: 15px 19px;
-  right: 25px;
-  bottom: 25px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
   font-size: 12px;
 }
@@ -2870,9 +2891,11 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
+  .floating-actions {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
   .floating-contact {
-    right: 14px;
-    bottom: 14px;
     padding: 13px 15px;
   }
   .developer-credit {
@@ -3560,9 +3583,9 @@ body {
   .hero-copy h1 {
     letter-spacing: -0.035em;
   }
-  .floating-contact {
-    bottom: 16px;
-    right: 14px;
+  .floating-actions {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: max(14px, env(safe-area-inset-right));
   }
 }
 @media (prefers-reduced-motion: reduce) {

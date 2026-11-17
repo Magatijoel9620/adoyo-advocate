@@ -17,17 +17,23 @@ export default function SiteHeader() {
   const onHome = pathname === "/";
   const navHref = (href: string) => onHome ? href : `/${href}`;
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>("light");
-  const headerRef = useRef<HTMLElement>(null);
-  useEffect(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "light";
+
     const stored = window.localStorage.getItem("adoyo-theme");
     const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-    const initial: Theme =
-      stored === "dark" || stored === "light" ? stored : preferred;
-    setTheme(initial);
-    document.documentElement.dataset.theme = initial;
+
+    return stored === "dark" || stored === "light" ? stored : preferred;
+  });
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
+  useEffect(() => {
     let previousY = window.scrollY;
     const handleScroll = () => {
       const currentY = window.scrollY;

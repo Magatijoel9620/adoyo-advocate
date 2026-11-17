@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import {
   ArrowDownRight,
@@ -22,6 +23,8 @@ import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
 import ServiceFinder from "@/components/ServiceFinder";
 import FirstVisitWelcome from "@/components/FirstVisitWelcome";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
+import BackToTopFab from "@/components/BackToTopFab";
 
 const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
   "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
@@ -105,7 +108,7 @@ export default function Home() {
         <span className="utility-location">
           <MapPin size={13} /> MALINDI, KENYA <i />{" "}
           <a href="mailto:info@adoyolaw.com">
-            EMAIL THE FIRM <ArrowUpRight size={12} />
+            EMAIL Adoyo Law <ArrowUpRight size={12} />
           </a>
         </span>
       </div>
@@ -232,7 +235,7 @@ export default function Home() {
               with direct communication and respect for each client's situation.
             </p>
             <a href="#firm" className="underlined-link">
-              Get to know the firm <ArrowRight size={16} />
+              Get to know Adoyo Law <ArrowRight size={16} />
             </a>
           </Reveal>
         </div>
@@ -642,7 +645,7 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} ADOYO J & COMPANY ADVOCATES</span>
           <span>INTEGRITY / PREPARATION / ADVOCACY</span>
-          <a href="#home">BACK TO TOP ↑</a>
+          <CookiePreferencesButton />
         </div>
         {/* <p className="footer-disclaimer">
           Website information is general in nature and does not create an
@@ -660,18 +663,21 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
           </a>
         </div>
       </footer>
-      <a
-        data-magnetic
-        className="floating-contact"
-        href={whatsappContactUrl}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Contact the firm on WhatsApp"
-      >
-        <MessageCircle size={18} />
-        <span>Speak to the firm</span>
-        <ArrowUpRight size={14} />
-      </a>
+      <div className="floating-actions">
+        <BackToTopFab />
+        <a
+          data-magnetic
+          className="floating-contact"
+          href={whatsappContactUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Contact the firm on WhatsApp"
+        >
+          <MessageCircle size={18} />
+          <span>Speak Adoyo Law</span>
+          <ArrowUpRight size={14} />
+        </a>
+      </div>
     </main>
   );
 }

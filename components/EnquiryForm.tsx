@@ -20,6 +20,7 @@ export default function EnquiryForm({ initialService = "" }: EnquiryFormProps) {
   const [status, setStatus] = useState<SubmissionStatus>("idle");
   const [error, setError] = useState("");
   const [selectedService, setSelectedService] = useState(initialService);
+  const [formStartTracked, setFormStartTracked] = useState(false);
 
   useEffect(() => {
     function handleServiceSelection(event: Event) {
@@ -88,8 +89,12 @@ export default function EnquiryForm({ initialService = "" }: EnquiryFormProps) {
         );
       }
 
+      window.dispatchEvent(new CustomEvent("adoyo:enquiry-success", {
+        detail: { service: payload.service },
+      }));
       form.reset();
       setSelectedService("");
+      setFormStartTracked(false);
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -102,7 +107,16 @@ export default function EnquiryForm({ initialService = "" }: EnquiryFormProps) {
   }
 
   return (
-    <form className="enquiry-form" onSubmit={handleSubmit}>
+    <form
+      className="enquiry-form"
+      onSubmit={handleSubmit}
+      onFocusCapture={() => {
+        if (!formStartTracked) {
+          setFormStartTracked(true);
+          window.dispatchEvent(new Event("adoyo:enquiry-start"));
+        }
+      }}
+    >
       <div className="form-row">
         <label>
           Full name
