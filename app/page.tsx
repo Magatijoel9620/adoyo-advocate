@@ -451,11 +451,6 @@ export default function Home() {
             </div> */}
           </Reveal>
         </div>
-        <div className="firm-trust-facts" aria-label="About the practice">
-          <div><span>01 / BASED IN</span><strong>Malindi, Kenya</strong><p>A local practice with an office at Sea Breeze Plaza.</p></div>
-          <div><span>02 / LEGAL SCOPE</span><strong>Kenyan law</strong><p>Enquiries are welcome for matters connected to Kenyan law.</p></div>
-          <div><span>03 / CLIENT APPROACH</span><strong>Clear communication</strong><p>Understand the circumstances, explain available options and prepare carefully.</p></div>
-        </div>
         <div className="office-gallery" aria-label="Inside the firm's office">
           <figure className="office-gallery-main">
             <Image
