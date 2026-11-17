@@ -4051,8 +4051,6 @@ a.button,
   .welcome-overlay,.welcome-dialog { animation:none!important; }
   .welcome-service-card,.welcome-close { transition:none!important; }
 }
-<<<<<<< HEAD
-=======
 
 /* Block A/B — focused service landing pages */
 .service-detail-page { min-height: 100vh; background: var(--paper); color: var(--ink); }
@@ -4227,4 +4225,3 @@ a.button,
   .enquiry-modal .form-row { grid-template-columns: 1fr; }
   .enquiry-modal .form-submit { width: 100%; justify-content: center; }
 }
->>>>>>> feature/adoyo-law-conversion-uplift

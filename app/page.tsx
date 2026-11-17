@@ -22,7 +22,9 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
 import ServiceFinder from "@/components/ServiceFinder";
-import ServiceEnquiryLink from "@/components/ServiceEnquiryLink";
+import FirstVisitWelcome from "@/components/FirstVisitWelcome";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
+import BackToTopFab from "@/components/BackToTopFab";
 
 const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
   "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
@@ -273,8 +275,7 @@ export default function Home() {
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <Reveal key={s.n} className="service-row">
-                <div className="service-count">{s.n}</div>
+              <Reveal key={s.slug} id={`service-${s.slug}`} className="service-row">
                 <div className="service-icon">
                   <Icon size={24} strokeWidth={1.3} />
                 </div>
@@ -668,7 +669,7 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
           aria-label="Contact the firm on WhatsApp"
         >
           <MessageCircle size={18} />
-          <span>Speak Adoyo Law</span>
+          <span>Speak To Adoyo Law</span>
           <ArrowUpRight size={14} />
         </a>
       </div>
