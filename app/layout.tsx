@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import InteractionEffects from '@/components/InteractionEffects';
+import AnalyticsConsent from '@/components/AnalyticsConsent';
 
 // Firm-confirmed canonical production domain; override only for a different deployment environment.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://adoyolaw.com';
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <InteractionEffects />
+        <AnalyticsConsent />
         {children}
       </body>
     </html>

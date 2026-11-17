@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import {
   ArrowDownRight,
@@ -22,7 +23,6 @@ import Reveal from "@/components/Reveal";
 import SceneLoader from "@/components/SceneLoader";
 import ServiceFinder from "@/components/ServiceFinder";
 import ServiceEnquiryLink from "@/components/ServiceEnquiryLink";
-import FirstVisitWelcome from "@/components/FirstVisitWelcome";
 
 const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent(
   "Hello, I would like to speak with Adoyo J & Company Advocates about a legal matter. Could you please assist me?"
@@ -30,7 +30,7 @@ const whatsappContactUrl = `https://wa.me/254701403467?text=${encodeURIComponent
 
 const services = [
   {
-    n: "01",
+    slug: "criminal-law-defence",
     title: "Criminal law & defence",
     short: "A clear, prepared response when the stakes are high.",
     detail:
@@ -39,7 +39,7 @@ const services = [
     tags: ["Bail & bond", "Court representation", "Criminal defence"],
   },
   {
-    n: "02",
+    slug: "conveyancing-property",
     title: "Conveyancing & property",
     short: "Careful legal work for decisions that carry lasting value.",
     detail:
@@ -48,7 +48,7 @@ const services = [
     tags: ["Property transfers", "Title review", "Due diligence"],
   },
   {
-    n: "03",
+    slug: "employment-labour",
     title: "Employment & labour",
     short: "Helping people and organisations navigate workplace disputes.",
     detail:
@@ -57,7 +57,7 @@ const services = [
     tags: ["Employment disputes", "Contracts", "Termination matters"],
   },
   {
-    n: "04",
+    slug: "road-traffic-claims",
     title: "Road traffic claims",
     short: "Guidance through the legal steps after a road accident.",
     detail:
@@ -106,7 +106,7 @@ export default function Home() {
         <span className="utility-location">
           <MapPin size={13} /> MALINDI, KENYA <i />{" "}
           <a href="mailto:info@adoyolaw.com">
-            EMAIL THE FIRM <ArrowUpRight size={12} />
+            EMAIL Adoyo Law <ArrowUpRight size={12} />
           </a>
         </span>
       </div>
@@ -233,7 +233,7 @@ export default function Home() {
               with direct communication and respect for each client's situation.
             </p>
             <a href="#firm" className="underlined-link">
-              Get to know the firm <ArrowRight size={16} />
+              Get to know Adoyo Law <ArrowRight size={16} />
             </a>
           </Reveal>
         </div>
@@ -273,12 +273,12 @@ export default function Home() {
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <Reveal key={s.n} id={`service-${s.n}`} className="service-row">
+              <Reveal key={s.n} className="service-row">
                 <div className="service-count">{s.n}</div>
                 <div className="service-icon">
                   <Icon size={24} strokeWidth={1.3} />
                 </div>
-                <div className="service-main">
+                <a className="service-main service-main-link" href={`/services/${s.slug}`} aria-label={`View ${s.title} service details`}>
                   <h3>{s.title}</h3>
                   <p>{s.short}</p>
                   <div className="service-tags">
@@ -286,10 +286,10 @@ export default function Home() {
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
-                </div>
+                </a>
                 <div className="service-detail">
                   <p>{s.detail}</p>
-                  <ServiceEnquiryLink service={s.n === "04" ? "Road traffic accident claims" : s.title} label={`Enquire about ${s.title}`} />
+                  <a className="service-details-cta" href={`/services/${s.slug}`} aria-label={`View ${s.title} service details`}> <ArrowUpRight size={15} /></a>
                 </div>
               </Reveal>
             );
@@ -325,8 +325,7 @@ export default function Home() {
         </div>
         <div className="journey-grid">
           <Reveal className="journey-card">
-            <span className="journey-number">01</span>
-            <div className="journey-icon">
+<div className="journey-icon">
               <MessageCircle size={21} />
             </div>
             <h3>Start with a conversation</h3>
@@ -337,8 +336,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal className="journey-card" delay={0.08}>
-            <span className="journey-number">02</span>
-            <div className="journey-icon">
+<div className="journey-icon">
               <Scale size={21} />
             </div>
             <h3>Understand the position</h3>
@@ -349,8 +347,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal className="journey-card" delay={0.16}>
-            <span className="journey-number">03</span>
-            <div className="journey-icon">
+<div className="journey-icon">
               <Check size={21} />
             </div>
             <h3>Agree on a way forward</h3>
@@ -620,7 +617,7 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
             <span>CONTACT</span>
             <a href="tel:+254701403467">+254 701 403 467</a>
             <a href="mailto:info@adoyolaw.com">info@adoyolaw.com</a>
-            <a href="mailto:info@adoyolaw.com">adoyoadvocate@gmail.com</a>
+            <a href="mailto:adoyoadvocate@gmail.com">adoyoadvocate@gmail.com</a>
             <a
               href="https://wa.me/254701403467"
               target="_blank"
@@ -642,7 +639,7 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} ADOYO J & COMPANY ADVOCATES</span>
           <span>INTEGRITY / PREPARATION / ADVOCACY</span>
-          <a href="#home">BACK TO TOP ↑</a>
+          <CookiePreferencesButton />
         </div>
         {/* <p className="footer-disclaimer">
           Website information is general in nature and does not create an
@@ -660,18 +657,21 @@ Providing thoughtful legal guidance in Kenya and assisting clients abroad with m
           </a>
         </div>
       </footer>
-      <a
-        data-magnetic
-        className="floating-contact"
-        href={whatsappContactUrl}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Contact the firm on WhatsApp"
-      >
-        <MessageCircle size={18} />
-        <span>Speak to the firm</span>
-        <ArrowUpRight size={14} />
-      </a>
+      <div className="floating-actions">
+        <BackToTopFab />
+        <a
+          data-magnetic
+          className="floating-contact"
+          href={whatsappContactUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Contact the firm on WhatsApp"
+        >
+          <MessageCircle size={18} />
+          <span>Speak Adoyo Law</span>
+          <ArrowUpRight size={14} />
+        </a>
+      </div>
     </main>
   );
 }

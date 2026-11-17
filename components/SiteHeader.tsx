@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 const links = [
   { href: "#approach", label: "Our approach" },
@@ -12,18 +13,27 @@ const links = [
 type Theme = "light" | "dark";
 
 export default function SiteHeader() {
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const navHref = (href: string) => onHome ? href : `/${href}`;
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>("light");
-  const headerRef = useRef<HTMLElement>(null);
-  useEffect(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "light";
+
     const stored = window.localStorage.getItem("adoyo-theme");
     const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-    const initial: Theme =
-      stored === "dark" || stored === "light" ? stored : preferred;
-    setTheme(initial);
-    document.documentElement.dataset.theme = initial;
+
+    return stored === "dark" || stored === "light" ? stored : preferred;
+  });
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
+  useEffect(() => {
     let previousY = window.scrollY;
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -49,7 +59,7 @@ export default function SiteHeader() {
   return (
     <header ref={headerRef} className="site-header">
       <a
-        href="#home"
+        href={navHref("#home")}
         className="brand"
         aria-label="Adoyo J & Company Advocates home"
       >
@@ -63,7 +73,7 @@ export default function SiteHeader() {
       </a>
       <nav className="desktop-nav" aria-label="Main navigation">
         {links.map((l) => (
-          <a key={l.href} href={l.href}>
+          <a key={l.href} href={navHref(l.href)}>
             {l.label}
           </a>
         ))}
@@ -79,7 +89,7 @@ export default function SiteHeader() {
           {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
           <span>{theme === "light" ? "Dark" : "Light"}</span>
         </button>
-        <a data-magnetic className="header-cta" href="#contact">
+        <a data-magnetic className="header-cta" href={navHref("#contact")}>
           Arrange a consultation <ArrowUpRight size={16} />
         </a>
       </div>
@@ -94,7 +104,7 @@ export default function SiteHeader() {
       {open && (
         <nav className="mobile-nav" aria-label="Mobile navigation">
           {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+            <a key={l.href} href={navHref(l.href)} onClick={() => setOpen(false)}>
               {l.label}
               <ArrowUpRight size={16} />
             </a>
@@ -109,7 +119,7 @@ export default function SiteHeader() {
           </button>
           <a
             className="mobile-nav-cta"
-            href="#contact"
+            href={navHref("#contact")}
             onClick={() => setOpen(false)}
           >
             Arrange a consultation
